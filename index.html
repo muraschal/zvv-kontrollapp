@@ -231,6 +231,19 @@
             color: #666;
             padding: 1rem;
         }
+
+        /* Animation für den Timer-Zustand */
+        @keyframes softPulse {
+            0% { background-color: #ffffff; }  /* Start: Weiß */
+            50% { background-color: #0479cc; } /* Mitte: ZVV Blau (#0479cc) */
+            100% { background-color: #ffffff; } /* Ende: Zurück zu Weiß */
+        }
+
+        /* Styling für die aktive Timer-Karte */
+        .timer-card.running {
+            animation: softPulse 2s ease-in-out infinite; /* Sanfte, endlose Animation */
+            color: #ffffff; /* Weißer Text für Kontrast während der blauen Phase */
+        }
     </style>
 </head>
 <body>
