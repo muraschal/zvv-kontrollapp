@@ -1,1 +1,56 @@
- 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontrollzeit-Erfassung</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .timer {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+        .controls {
+            margin: 1rem 0;
+        }
+        .media-options {
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kontrollzeit-Erfassung</h1>
+        
+        <div class="timer">00:00:00</div>
+        
+        <div class="controls">
+            <button id="startStop">Start</button>
+            <button id="reset">Abbrechen</button>
+        </div>
+
+        <div class="media-options">
+            <h3>Trägermedium:</h3>
+            <input type="radio" id="swisspass" name="medium" value="SwissPass" checked>
+            <label for="swisspass">SwissPass</label><br>
+            
+            <input type="radio" id="paper" name="medium" value="Sicherheitspapier">
+            <label for="paper">Sicherheitspapier</label><br>
+            
+            <input type="radio" id="eticket" name="medium" value="E-Ticket">
+            <label for="eticket">E-Ticket</label><br>
+            
+            <input type="radio" id="eticket-verify" name="medium" value="E-Ticket mit Ausweisprüfung">
+            <label for="eticket-verify">E-Ticket mit Ausweisprüfung</label>
+        </div>
+
+        <button id="downloadCSV">CSV herunterladen</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 
