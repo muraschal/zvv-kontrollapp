@@ -18,29 +18,17 @@ resetBtn.addEventListener('click', resetTimer);
 downloadBtn.addEventListener('click', downloadCSV);
 
 function toggleTimer() {
-    console.log('Timer wurde geklickt!');
     if (!isRunning) {
-        // Timer starten
         startTime = Date.now();
         timer = setInterval(updateDisplay, 10);
         startStopBtn.textContent = 'Stop';
         isRunning = true;
+        timerDisplay.classList.add('running');
     } else {
-        // Timer stoppen und Messung speichern
         clearInterval(timer);
         const duration = Math.round((Date.now() - startTime) / 1000);
-        const medium = document.querySelector('input[name="medium"]:checked').value;
-        
-        measurements.push({
-            timestamp: new Date().toISOString(),
-            duration: duration,
-            medium: medium
-        });
-
-        startStopBtn.textContent = 'Start';
-        isRunning = false;
-        timerDisplay.textContent = '00:00:00.000';
-        updateMeasurementsList();
+        timerDisplay.classList.remove('running');
+        showMediaDialog(duration);
     }
 }
 
@@ -128,4 +116,26 @@ function updateMeasurementsList() {
             `;
         })
         .join('');
+} 
+
+function showMediaDialog(duration) {
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    document.body.appendChild(overlay);
+    
+    const mediaDialog = document.getElementById('mediaDialog');
+    mediaDialog.classList.remove('hidden');
+    
+    const mediaButtons = mediaDialog.querySelectorAll('.media-button');
+    mediaButtons.forEach(button => {
+        button.onclick = () => {
+            const medium = button.dataset.medium;
+            if (medium !== 'Abgebrochen') {
+                saveMeasurement(duration, medium);
+            }
+            mediaDialog.classList.add('hidden');
+            overlay.remove();
+            resetTimer();
+        };
+    });
 } 
