@@ -22,7 +22,7 @@ function toggleTimer() {
     if (!isRunning) {
         // Timer starten
         startTime = Date.now();
-        timer = setInterval(updateDisplay, 1000);
+        timer = setInterval(updateDisplay, 10);
         startStopBtn.textContent = 'Stop';
         isRunning = true;
     } else {
@@ -39,27 +39,32 @@ function toggleTimer() {
 
         startStopBtn.textContent = 'Start';
         isRunning = false;
-        timerDisplay.textContent = '00:00:00';
+        timerDisplay.textContent = '00:00:00.000';
         updateMeasurementsList();
     }
 }
 
 function updateDisplay() {
-    const elapsed = Math.round((Date.now() - startTime) / 1000);
-    const hours = Math.floor(elapsed / 3600);
-    const minutes = Math.floor((elapsed % 3600) / 60);
-    const seconds = elapsed % 60;
+    const elapsed = Date.now() - startTime;
+    const ms = elapsed % 1000;
+    const seconds = Math.floor(elapsed / 1000) % 60;
+    const minutes = Math.floor(elapsed / 60000) % 60;
+    const hours = Math.floor(elapsed / 3600000);
     
-    timerDisplay.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    timerDisplay.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad3(ms)}`;
 }
 
 function pad(number) {
     return number.toString().padStart(2, '0');
 }
 
+function pad3(number) {
+    return number.toString().padStart(3, '0');
+}
+
 function resetTimer() {
     clearInterval(timer);
-    timerDisplay.textContent = '00:00:00';
+    timerDisplay.textContent = '00:00:00.000';
     startStopBtn.textContent = 'Start';
     isRunning = false;
 }
