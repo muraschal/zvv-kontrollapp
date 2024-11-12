@@ -33,37 +33,23 @@
             </div>
         </div>
 
-        <div class="media-options">
-            <h3>Trägermedium</h3>
-            <div class="radio-group">
-                <div class="radio-item">
-                    <input type="radio" id="swisspass" name="medium" value="SwissPass" checked>
-                    <label for="swisspass">SwissPass</label>
-                </div>
-                
-                <div class="radio-item">
-                    <input type="radio" id="paper" name="medium" value="Sicherheitspapier">
-                    <label for="paper">Sicherheitspapier</label>
-                </div>
-                
-                <div class="radio-item">
-                    <input type="radio" id="eticket" name="medium" value="E-Ticket">
-                    <label for="eticket">E-Ticket</label>
-                </div>
-                
-                <div class="radio-item">
-                    <input type="radio" id="eticket-verify" name="medium" value="E-Ticket mit Ausweisprüfung">
-                    <label for="eticket-verify">E-Ticket mit Ausweisprüfung</label>
-                </div>
-            </div>
-        </div>
-
         <button id="downloadCSV">CSV herunterladen</button>
 
         <!-- Neue Messungsübersicht -->
         <div class="card measurements-card">
             <h2>Letzte Kontrollen</h2>
             <div id="measurementsList"></div>
+        </div>
+
+        <div id="mediaDialog" class="media-dialog hidden">
+            <h3>Trägermedium wählen</h3>
+            <div class="media-buttons">
+                <button class="media-button" data-medium="SwissPass">SwissPass</button>
+                <button class="media-button" data-medium="Sicherheitspapier">Sicherheitspapier</button>
+                <button class="media-button" data-medium="E-Ticket">E-Ticket</button>
+                <button class="media-button" data-medium="E-Ticket mit Ausweisprüfung">E-Ticket mit Ausweisprüfung</button>
+                <button class="media-button cancel" data-medium="Abgebrochen">Abbrechen</button>
+            </div>
         </div>
     </div>
 
