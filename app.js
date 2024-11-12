@@ -132,6 +132,7 @@ function showMediaDialog(duration) {
             const medium = button.dataset.medium;
             if (medium !== 'Abgebrochen') {
                 saveMeasurement(duration, medium);
+                updateMeasurementsList();
             }
             mediaDialog.classList.add('hidden');
             overlay.remove();
