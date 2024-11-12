@@ -3,6 +3,13 @@ let isRunning = false;
 let startTime;
 let measurements = [];
 
+// Lade gespeicherte Messungen
+const savedMeasurements = localStorage.getItem('measurements');
+if (savedMeasurements) {
+    measurements = JSON.parse(savedMeasurements);
+    updateMeasurementsList();
+}
+
 const timerDisplay = document.querySelector('.timer');
 const startStopBtn = document.getElementById('startStop');
 const resetBtn = document.getElementById('reset');
@@ -139,4 +146,17 @@ function showMediaDialog(duration) {
             resetTimer();
         };
     });
+} 
+
+function saveMeasurement(duration, medium) {
+    const measurement = {
+        timestamp: new Date().toISOString(),
+        duration: duration,
+        medium: medium
+    };
+    
+    measurements.push(measurement);
+    
+    // Optional: Speichern im localStorage
+    localStorage.setItem('measurements', JSON.stringify(measurements));
 } 
