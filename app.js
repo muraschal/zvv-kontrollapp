@@ -23,6 +23,7 @@ console.log('Download Button:', downloadBtn);
 startStopBtn.addEventListener('click', toggleTimer);
 resetBtn.addEventListener('click', resetTimer);
 downloadBtn.addEventListener('click', downloadCSV);
+document.getElementById('deleteAll').addEventListener('click', deleteAllMeasurements);
 
 function toggleTimer() {
     if (!isRunning) {
@@ -107,16 +108,27 @@ function updateMeasurementsList() {
     }
 
     measurementsList.innerHTML = measurements
-        .slice(-5) // Zeigt nur die letzten 5 Messungen
-        .reverse() // Neueste zuerst
+        .slice(-5)
+        .reverse()
         .map(m => {
             const date = new Date(m.timestamp);
-            const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-            const duration = `${Math.floor(m.duration / 60)}:${(m.duration % 60).toString().padStart(2, '0')}`;
+            const formattedDate = date.toLocaleString('de-CH', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            const minutes = Math.floor(m.duration / 60);
+            const seconds = Math.floor(m.duration % 60);
+            const milliseconds = Math.floor((m.duration % 1) * 1000);
+            const formattedDuration = `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+            
             return `
                 <div class="measurement-item" onclick="showMeasurementDetails('${m.timestamp}')">
                     <div>Datum: ${formattedDate}</div>
-                    <div>Dauer: ${duration} min</div>
+                    <div>Dauer: ${formattedDuration}</div>
                     <div>Medium: ${m.medium}</div>
                     <div class="measurement-arrow">›</div>
                 </div>
@@ -148,15 +160,72 @@ function showMediaDialog(duration) {
     });
 } 
 
-function saveMeasurement(duration, medium) {
+async function saveMeasurement(duration, medium) {
     const measurement = {
         timestamp: new Date().toISOString(),
         duration: duration,
         medium: medium
     };
     
-    measurements.push(measurement);
-    
-    // Optional: Speichern im localStorage
-    localStorage.setItem('measurements', JSON.stringify(measurements));
+    try {
+        const response = await fetch('/api/measurements', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(measurement)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Netzwerkfehler');
+        }
+        
+        const savedMeasurement = await response.json();
+        measurements.push(savedMeasurement);
+        updateMeasurementsList();
+        
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+        // Fallback auf localStorage
+        measurements.push(measurement);
+        localStorage.setItem('measurements', JSON.stringify(measurements));
+    }
+} 
+
+async function loadMeasurements() {
+    try {
+        const response = await fetch('/api/measurements');
+        measurements = await response.json();
+    } catch (error) {
+        console.error('Fehler beim Laden:', error);
+        const savedMeasurements = localStorage.getItem('measurements');
+        if (savedMeasurements) {
+            measurements = JSON.parse(savedMeasurements);
+        }
+    }
+    updateMeasurementsList();
+}
+
+// Ersetze die existierende localStorage-Ladeoperation mit:
+loadMeasurements(); 
+
+async function deleteAllMeasurements() {
+    if (confirm('Möchten Sie wirklich alle Kontrollen löschen?')) {
+        try {
+            const response = await fetch('/api/measurements', {
+                method: 'DELETE'
+            });
+            
+            if (!response.ok) {
+                throw new Error('Netzwerkfehler');
+            }
+            
+            measurements = [];
+            updateMeasurementsList();
+            localStorage.removeItem('measurements');
+            
+        } catch (error) {
+            console.error('Fehler beim Löschen:', error);
+        }
+    }
 } 
