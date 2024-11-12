@@ -227,3 +227,21 @@ button:active {
     background: rgba(0,0,0,0.5);
     z-index: 1000;
 }
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
