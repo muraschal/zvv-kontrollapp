@@ -76,15 +76,8 @@ body::before {
     margin: 1rem 0;
 }
 
-@keyframes timerBlink {
-    0% { color: var(--timer-active-color); }
-    50% { color: transparent; }
-    100% { color: var(--timer-active-color); }
-}
-
 .timer.running {
     color: var(--timer-active-color);
-    animation: timerBlink 2s ease-in-out infinite;
 }
 
 .controls {
