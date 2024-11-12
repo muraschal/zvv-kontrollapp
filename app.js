@@ -186,7 +186,6 @@ async function saveMeasurement(duration, medium) {
         
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
-        // Fallback auf localStorage
         measurements.push(measurement);
         localStorage.setItem('measurements', JSON.stringify(measurements));
     }

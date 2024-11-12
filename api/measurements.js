@@ -19,6 +19,11 @@ export default async function handler(req, res) {
       `;
       return res.status(200).json(rows);
     }
+    
+    if (req.method === 'DELETE') {
+      await sql`TRUNCATE TABLE measurements`;
+      return res.status(200).json({ message: 'Alle Messungen gelöscht' });
+    }
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
