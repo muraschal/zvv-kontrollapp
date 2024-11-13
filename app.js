@@ -182,7 +182,7 @@ async function saveMeasurement(duration, medium) {
         }
         
         const savedMeasurement = await response.json();
-        measurements.push(measurement);
+        measurements.push(savedMeasurement);
         updateMeasurementsList();
         
     } catch (error) {
