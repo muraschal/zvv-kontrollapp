@@ -81,8 +81,9 @@ function downloadCSV() {
                 minute: '2-digit',
                 second: '2-digit',
                 timeZone: 'Europe/Zurich'
-            });
-            return `${formattedDate},${row.duration},${row.medium}`;
+            }).replace(/,/g, '');
+            
+            return `"${formattedDate}",${row.duration},${row.medium}`;
         }).join("\n");
 
     const encodedUri = encodeURI(csvContent);
