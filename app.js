@@ -34,7 +34,8 @@ function toggleTimer() {
         timerDisplay.classList.add('running');
     } else {
         clearInterval(timer);
-        const duration = Math.round((Date.now() - startTime) / 1000);
+        const elapsed = Date.now() - startTime;
+        const duration = elapsed / 1000;
         timerDisplay.classList.remove('running');
         showMediaDialog(duration);
     }
@@ -163,7 +164,7 @@ function showMediaDialog(duration) {
 async function saveMeasurement(duration, medium) {
     const measurement = {
         timestamp: new Date().toISOString(),
-        duration: duration,
+        duration: parseFloat(duration.toFixed(3)),
         medium: medium
     };
     
@@ -181,7 +182,7 @@ async function saveMeasurement(duration, medium) {
         }
         
         const savedMeasurement = await response.json();
-        measurements.push(savedMeasurement);
+        measurements.push(measurement);
         updateMeasurementsList();
         
     } catch (error) {

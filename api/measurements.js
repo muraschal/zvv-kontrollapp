@@ -4,11 +4,12 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'POST') {
       const { timestamp, duration, medium } = req.body;
-      await sql`
+      const result = await sql`
         INSERT INTO measurements (timestamp, duration, medium)
-        VALUES (${timestamp}, ${duration}, ${medium})
+        VALUES (${timestamp}, ${duration}::decimal(10,3), ${medium})
+        RETURNING *
       `;
-      return res.status(200).json({ success: true });
+      return res.status(200).json(result.rows[0]);
     }
     
     if (req.method === 'GET') {
