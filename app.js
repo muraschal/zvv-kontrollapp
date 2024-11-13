@@ -175,9 +175,7 @@ function showMediaDialog(duration) {
 
 async function saveMeasurement(duration, medium) {
     const measurement = {
-        timestamp: new Date().toLocaleString('de-CH', {
-            timeZone: 'Europe/Zurich'
-        }),
+        timestamp: new Date().toISOString(),
         duration: parseFloat(duration.toFixed(3)),
         medium: medium
     };
