@@ -71,7 +71,19 @@ function downloadCSV() {
 
     const csvContent = "data:text/csv;charset=utf-8," 
         + "Zeitstempel,Kontrolldauer (Sekunden),Trägermedium\n"
-        + measurements.map(row => `${row.timestamp},${row.duration},${row.medium}`).join("\n");
+        + measurements.map(row => {
+            const date = new Date(row.timestamp);
+            const formattedDate = date.toLocaleString('de-CH', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'Europe/Zurich'
+            });
+            return `${formattedDate},${row.duration},${row.medium}`;
+        }).join("\n");
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
@@ -163,7 +175,9 @@ function showMediaDialog(duration) {
 
 async function saveMeasurement(duration, medium) {
     const measurement = {
-        timestamp: new Date().toISOString(),
+        timestamp: new Date().toLocaleString('de-CH', {
+            timeZone: 'Europe/Zurich'
+        }),
         duration: parseFloat(duration.toFixed(3)),
         medium: medium
     };
