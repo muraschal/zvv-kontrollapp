@@ -67,7 +67,7 @@ body::before {
 .zvv-logo {
     height: 2.5rem;
     width: auto;
-    border-radius: 8px;
+    filter: brightness(0) invert(1);  /* Macht das Logo weiß */
 }
 
 .timer-card, .media-options, .measurements-card {
