@@ -1,9 +1,11 @@
 # Kontrollzeit-Erfassungs-App
 
 ## 1. Technologie-Stack
-- **Frontend:** HTML + JavaScript (React optional)
-- **Backend:** Node.js + Express
-- **Datenspeicherung:** Redis (Upstash)
+- **Frontend:** HTML + JavaScript (Vanilla JS)
+- **Backend:** Vercel Serverless Functions
+- **Datenspeicherung:** 
+  - **Online:** Redis (Upstash)
+  - **Offline:** Browser LocalStorage mit Auto-Sync
 - **Hosting:** Vercel
 
 ## 2. App-Funktionalitäten
@@ -16,19 +18,29 @@
   - E-Ticket
   - E-Ticket mit Ausweisprüfung
 
-### Datenexport & Verwaltung
-- 📊 Automatische CSV-Generierung nach jeder Messung
-- 💾 Download-Button für CSV-Datei
+### Datenmanagement
+- 📊 Automatische Speicherung in Redis
+- 💾 Offline-Fähigkeit mit LocalStorage
+- 🔄 Automatische Synchronisation
+- 📥 Excel-kompatible CSV-Exports
 - 🗑️ Löschen aller gespeicherten Kontrollen
-- 📈 Excel-kompatibles Format
 
 ## 3. Datenstruktur
-Die Messungen werden in Redis gespeichert und enthalten:
-- Zeitstempel
-- Kontrolldauer (in Sekunden)
-- Gewähltes Trägermedium
+Die Messungen werden in Redis als JSON-Objekte gespeichert:
+```json
+{
+  "timestamp": "2024-02-14T15:30:00.000Z",
+  "duration": 12.345,
+  "medium": "SwissPass",
+  "synced": true
+}
+```
 
 ## 4. Installation & Setup
+
+### Voraussetzungen
+- Node.js (Version 14 oder höher)
+- Upstash Redis Account
 
 ### Lokale Entwicklung
 1. Repository klonen:
@@ -58,5 +70,11 @@ Die Messungen werden in Redis gespeichert und enthalten:
 ### Deployment
 Die App ist automatisch mit Vercel verbunden und deployed bei jedem Push auf den main Branch.
 
-## 5. Updates & Changelog
+## 5. Features
+- **Offline-Fähigkeit**: Funktioniert auch ohne Internetverbindung
+- **Auto-Sync**: Synchronisiert Offline-Daten automatisch
+- **PWA-Support**: Installierbar als Progressive Web App
+- **Responsive Design**: Optimiert für mobile Nutzung
+
+## 6. Updates & Changelog
 Siehe [CHANGELOG.md](CHANGELOG.md) für eine detaillierte Liste aller Änderungen.

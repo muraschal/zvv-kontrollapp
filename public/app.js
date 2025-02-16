@@ -27,6 +27,7 @@ document.getElementById('deleteAll').addEventListener('click', deleteAllMeasurem
 
 function toggleTimer() {
     if (!isRunning) {
+        if (timer) clearInterval(timer);
         startTime = Date.now();
         timer = setInterval(updateDisplay, 10);
         startStopBtn.textContent = 'Stop';
@@ -42,6 +43,7 @@ function toggleTimer() {
 }
 
 function updateDisplay() {
+    if (!isRunning) return;
     const elapsed = Date.now() - startTime;
     const ms = elapsed % 1000;
     const seconds = Math.floor(elapsed / 1000) % 60;
@@ -67,10 +69,10 @@ function resetTimer() {
 }
 
 function downloadCSV() {
-    if (measurements.length === 0) return;
-
-    const csvContent = "data:text/csv;charset=utf-8," 
-        + "Zeitstempel,Kontrolldauer (Sekunden),Trägermedium\n"
+    // Excel-kompatibles Format mit BOM
+    const BOM = "\uFEFF";
+    const csvContent = "data:text/csv;charset=utf-8," + BOM
+        + "Zeitstempel,Kontrolldauer (Sekunden),Trägermedium,Standort\n"
         + measurements.map(row => {
             const date = new Date(row.timestamp);
             const formattedDate = date.toLocaleString('de-CH', {
@@ -83,7 +85,7 @@ function downloadCSV() {
                 timeZone: 'Europe/Zurich'
             }).replace(/,/g, '');
             
-            return `"${formattedDate}",${row.duration},${row.medium}`;
+            return `"${formattedDate}",${row.duration},${row.medium},${row.location}`;
         }).join("\n");
 
     const encodedUri = encodeURI(csvContent);
@@ -151,7 +153,7 @@ function updateMeasurementsList() {
         .join('');
 } 
 
-function showMediaDialog(duration) {
+async function showMediaDialog(duration) {
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
     document.body.appendChild(overlay);
@@ -161,10 +163,10 @@ function showMediaDialog(duration) {
     
     const mediaButtons = mediaDialog.querySelectorAll('.media-button');
     mediaButtons.forEach(button => {
-        button.onclick = () => {
+        button.onclick = async () => {
             const medium = button.dataset.medium;
             if (medium !== 'Abgebrochen') {
-                saveMeasurement(duration, medium);
+                await saveMeasurement(duration, medium);
                 updateMeasurementsList();
             }
             mediaDialog.classList.add('hidden');
@@ -174,6 +176,42 @@ function showMediaDialog(duration) {
     });
 } 
 
+// Neue Funktion für Offline-Speicherung
+function saveToLocalStorage(measurement) {
+    const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
+    measurement.synced = false;
+    offlineMeasurements.push(measurement);
+    localStorage.setItem('offlineMeasurements', JSON.stringify(offlineMeasurements));
+}
+
+// Neue Funktion für Synchronisation
+async function syncOfflineMeasurements() {
+    const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
+    
+    if (offlineMeasurements.length === 0) return;
+    
+    for (const measurement of offlineMeasurements) {
+        try {
+            const response = await fetch('/api/measurements', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(measurement)
+            });
+            
+            if (response.ok) {
+                // Entferne erfolgreich synchronisierte Messung
+                const index = offlineMeasurements.indexOf(measurement);
+                offlineMeasurements.splice(index, 1);
+            }
+        } catch (error) {
+            console.error('Sync error:', error);
+        }
+    }
+    
+    localStorage.setItem('offlineMeasurements', JSON.stringify(offlineMeasurements));
+}
+
+// Modifizierte saveMeasurement Funktion
 async function saveMeasurement(duration, medium) {
     const measurement = {
         timestamp: new Date().toISOString(),
@@ -184,9 +222,7 @@ async function saveMeasurement(duration, medium) {
     try {
         const response = await fetch('/api/measurements', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(measurement)
         });
         
@@ -200,22 +236,33 @@ async function saveMeasurement(duration, medium) {
         
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
+        saveToLocalStorage(measurement);
         measurements.push(measurement);
-        localStorage.setItem('measurements', JSON.stringify(measurements));
+        updateMeasurementsList();
     }
-} 
+}
 
+// Modifizierte loadMeasurements Funktion
 async function loadMeasurements() {
     try {
+        // Versuche offline Messungen zu synchronisieren
+        await syncOfflineMeasurements();
+        
         const response = await fetch('/api/measurements');
+        if (!response.ok) throw new Error('Netzwerkfehler');
+        
         measurements = await response.json();
+        
+        // Füge nicht synchronisierte Messungen hinzu
+        const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
+        measurements = [...measurements, ...offlineMeasurements];
+        
     } catch (error) {
         console.error('Fehler beim Laden:', error);
-        const savedMeasurements = localStorage.getItem('measurements');
-        if (savedMeasurements) {
-            measurements = JSON.parse(savedMeasurements);
-        }
+        const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
+        measurements = offlineMeasurements;
     }
+    
     updateMeasurementsList();
 }
 
