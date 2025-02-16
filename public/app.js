@@ -270,11 +270,30 @@ async function loadMeasurements() {
 loadMeasurements(); 
 
 async function deleteAllMeasurements() {
+    const password = prompt('Bitte geben Sie das Passwort ein:');
+    
+    if (!password) {
+        return; // Wenn Cancel geklickt wurde
+    }
+    
+    if (password !== 'satoshi') {
+        alert('Falsches Passwort');
+        return;
+    }
+    
     if (confirm('Möchten Sie wirklich alle Kontrollen löschen?')) {
         try {
             const response = await fetch('/api/measurements', {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${password}`
+                }
             });
+            
+            if (response.status === 401) {
+                alert('Nicht autorisiert');
+                return;
+            }
             
             if (!response.ok) {
                 throw new Error('Netzwerkfehler');
@@ -283,9 +302,11 @@ async function deleteAllMeasurements() {
             measurements = [];
             updateMeasurementsList();
             localStorage.removeItem('measurements');
+            localStorage.removeItem('offlineMeasurements');  // Auch Offline-Daten löschen
             
         } catch (error) {
             console.error('Fehler beim Löschen:', error);
+            alert('Fehler beim Löschen der Daten');
         }
     }
 } 

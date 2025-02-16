@@ -45,8 +45,25 @@ export default async function handler(req, res) {
     }
     
     if (req.method === 'DELETE') {
-      await redis.del('measurements');
-      return res.status(200).json({ message: 'Alle Messungen gelöscht' });
+      const authHeader = req.headers.authorization;
+      
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Authentifizierung erforderlich' });
+      }
+      
+      const password = authHeader.split(' ')[1];
+      
+      if (password !== 'satoshi') {
+        return res.status(401).json({ error: 'Nicht autorisiert' });
+      }
+      
+      try {
+        await redis.del('measurements');
+        return res.status(200).json({ message: 'Alle Messungen gelöscht' });
+      } catch (error) {
+        console.error('Fehler beim Löschen:', error);
+        return res.status(500).json({ error: 'Fehler beim Löschen der Daten' });
+      }
     }
   } catch (error) {
     console.error('Redis error:', error);
