@@ -33,7 +33,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('gfx/bg.jpg');
+    background-image: url('gfx/zvv-pattern.svg');
     background-size: cover;
     background-position: center;
     opacity: 0.25;
@@ -58,6 +58,15 @@ body::before {
     position: sticky;
     top: 0;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.zvv-logo {
+    height: 2rem;
+    width: auto;
 }
 
 .timer-card, .media-options, .measurements-card {
@@ -258,9 +267,10 @@ button:active {
     right: 0;
     background-color: var(--zvv-blue);
     color: var(--zvv-white);
-    padding: 0.5rem;
+    padding: 0.75rem;
     font-size: 0.9rem;
     z-index: 100;
+    border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .footer-content {
