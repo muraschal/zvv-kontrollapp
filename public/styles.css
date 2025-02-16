@@ -51,7 +51,7 @@ body::before {
 }
 
 .header {
-    background-color: var(--zvv-blue);
+    background-color: var(--zvv-light-blue);  /* Helleres Blau für Header */
     color: var(--zvv-white);
     padding: 1rem;
     text-align: center;
@@ -266,7 +266,7 @@ button:active {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: var(--zvv-blue);
+    background-color: var(--zvv-blue);  /* Dunkleres Blau für Footer */
     color: var(--zvv-white);
     padding: 0.75rem;
     font-size: 0.9rem;
