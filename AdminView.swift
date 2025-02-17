@@ -1,23 +1,41 @@
 import SwiftUI
 
 struct AdminView: View {
+    @EnvironmentObject var kontrollenManager: KontrollenManager
+    
     var body: some View {
-        NavigationView {
-            List {
-                Button(action: {
-                    // CSV Export Logik kommt später
-                }) {
-                    Label("CSV herunterladen", systemImage: "arrow.down.doc")
-                }
-                
-                Button(action: {
-                    // Lösch-Logik kommt später
-                }) {
-                    Label("Alle Kontrollen löschen", systemImage: "trash")
-                        .foregroundColor(.red)
-                }
+        VStack {
+            // Admin-Funktionen hierher verschieben
+            Button(action: exportCSV) {
+                Text("CSV herunterladen")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.pink)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
             }
-            .navigationTitle("Admin")
+            .padding(.horizontal)
+            
+            Button(action: { showDeleteAlert() }) {
+                Text("Alle Kontrollen löschen")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            
+            Spacer()
         }
+        .navigationTitle("Admin")
+    }
+    
+    private func exportCSV() {
+        // CSV Export Logik kommt später
+    }
+    
+    private func showDeleteAlert() {
+        // Lösch-Logik kommt später
     }
 } 
