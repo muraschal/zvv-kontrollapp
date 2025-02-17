@@ -1,14 +1,15 @@
 import SwiftUI
 
 struct TabNavigation: View {
+    @StateObject private var kontrollenManager = KontrollenManager()
     @State private var selectedTab = 0
     
     var body: some View {
         TabView(selection: $selectedTab) {
             ContentView()
                 .tabItem {
-                    Image(systemName: "list.bullet")
-                    Text("Kontrollen")
+                    Image(systemName: "timer")
+                    Text("Zeit")
                 }
                 .tag(0)
             
@@ -19,13 +20,15 @@ struct TabNavigation: View {
                 }
                 .tag(1)
             
-            Text("Profil")
+            Text("Profil") // Placeholder für Profil-View
                 .tabItem {
                     Image(systemName: "person.circle")
-                    Text("Profil")
+                    Text("ZVV")
                 }
                 .tag(2)
         }
+        .environmentObject(kontrollenManager)
+        .accentColor(.blue) // ZVV Blau
     }
 }
 
