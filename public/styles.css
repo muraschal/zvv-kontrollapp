@@ -318,7 +318,7 @@ button:active {
 }
 
 .delete-button {
-    background-color: var(--zvv-red);
+    background-color: var(--zvv-red) !important;
     color: white;
     width: 100%;
     margin: 1rem 0;
@@ -775,32 +775,42 @@ button:active {
 /* Buttons in der Admin-View */
 .admin-view button {
     margin: 10px;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 20px;
+    border-radius: 8px;
     background-color: var(--zvv-blue);
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
-}
-
-#downloadCSV, #downloadXLS {
     display: inline-block;
-    min-width: 180px;
+    min-width: 220px;
     text-align: center;
 }
 
-#downloadXLS {
-    background-color: #217346; /* Excel-Grün */
+.admin-view button i {
+    margin-right: 8px;
 }
 
-#downloadXLS:hover {
-    background-color: #1e6e41;
+#downloadCSV, #downloadXLS {
+    background-color: var(--zvv-blue);
+}
+
+#downloadCSV:hover, #downloadXLS:hover {
+    background-color: #0366ad;
+}
+
+.delete-button {
+    background-color: var(--zvv-red) !important;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333 !important;
 }
 
 .admin-view button:hover {
-    background-color: var(--zvv-dark-blue);
+    background-color: #0366ad;
 }
 
 .media-dialog h3 {
