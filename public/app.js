@@ -114,12 +114,14 @@ function downloadCSV() {
             // Gleiche Fallback-Logik wie in der Anzeige
             const result = (row.result === undefined || row.result === null) ? 'Abgebrochen' : row.result;
             
-            return `"${formattedDate}",${row.duration},${row.medium},${result}`;
+            return `"${formattedDate}",${row.duration},"${row.medium}","${result}"`;
         }).join("\n");
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
+    // Debug-Log für CSV-Inhalt
+    console.log('CSV Content:', csvContent);
     link.setAttribute("download", `kontrollzeiten_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
