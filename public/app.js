@@ -191,12 +191,18 @@ function updateMeasurementsList() {
 } 
 
 async function showMediaDialog(duration, result = null) {
+    // Entferne alle existierenden Overlays
+    document.querySelectorAll('.overlay').forEach(el => el.remove());
+    
+    // Erstelle neues Overlay
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
     document.body.appendChild(overlay);
     
     // Wenn noch kein Ergebnis gewählt wurde, zeige Trägermedium-Dialog
     if (!result) {
+        // Verstecke beide Dialoge zunächst
+        document.getElementById('resultDialog').classList.add('hidden');
         const mediaDialog = document.getElementById('mediaDialog');
         mediaDialog.classList.remove('hidden');
         
@@ -216,7 +222,8 @@ async function showMediaDialog(duration, result = null) {
             };
         });
     } else {
-        // Zeige Ergebnis-Dialog
+        // Verstecke beide Dialoge zunächst
+        document.getElementById('mediaDialog').classList.add('hidden');
         const resultDialog = document.getElementById('resultDialog');
         resultDialog.classList.remove('hidden');
         
