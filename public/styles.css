@@ -360,7 +360,7 @@ button:active {
     color: var(--text-black);
     margin-bottom: 0.5rem;
     font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
 }
 
 .changelog-entry ul {
