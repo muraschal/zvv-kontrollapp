@@ -552,7 +552,7 @@ function updateStatistics() {
                     },
                     title: {
                         display: true,
-                        text: chartType === 'bar' ? 'Trägermedium' : 'Zeit',
+                        text: chartType === 'bar' ? 'Trägermedium' : 'Kontrollvorgang',
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
@@ -630,16 +630,14 @@ function calculateTimelineData() {
         .sort((a, b) => a.duration - b.duration);
     const median = sortedDurations[Math.floor(sortedDurations.length / 2)].duration;
 
+    // Nehme die letzten 20 Messungen und nummeriere sie einfach durch
+    const recentMeasurements = measurements.slice(-20);
+    
     return {
-        data: measurements
-            .slice(-20)
-            .map(m => ({
-                time: new Date(m.timestamp).toLocaleTimeString('de-CH', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }),
-                duration: m.duration
-            })),
+        data: recentMeasurements.map((m, index) => ({
+            time: `#${index + 1}`,
+            duration: m.duration
+        })),
         median: median
     };
 }
