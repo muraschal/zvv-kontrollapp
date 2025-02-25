@@ -566,7 +566,10 @@ window.addEventListener('DOMContentLoaded', () => {
         path: '/gfx/zvv-animation-01.json',
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice',
-            className: 'background-animation'
+            className: 'background-animation',
+            initialSegment: [0, 100],
+            scaleMode: 'noScale',
+            viewBoxSize: 133.33 // 100/0.75 für 75% Größe
         }
     });
 }); 
