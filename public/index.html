@@ -32,151 +32,153 @@
         <h1>Kontrollapp</h1>
     </div>
 
-    <div class="container">
-        <div class="view timer-view active">
-            <div class="timer-card">
-                <div class="timer">00:00:00.000</div>
-                
-                <div class="controls">
-                    <button id="startStop" class="primary-button">Start</button>
+    <div class="app-container">
+        <div class="breathing-container">
+            <div class="view timer-view active">
+                <div class="timer-card">
+                    <div class="timer">00:00:00.000</div>
+                    
+                    <div class="controls">
+                        <button id="startStop" class="primary-button">Start</button>
+                    </div>
+                </div>
+
+                <div class="card measurements-card">
+                    <h2>Letzte Kontrollen</h2>
+                    <div id="measurementsList"></div>
                 </div>
             </div>
 
-            <div class="card measurements-card">
-                <h2>Letzte Kontrollen</h2>
-                <div id="measurementsList"></div>
-            </div>
-        </div>
-
-        <div class="view admin-view">
-            <div class="stats-card">
-                <h2>Statistiken</h2>
-                <canvas id="statsChart"></canvas>
-                <div class="stats-summary">
-                    <div>Durchschnitt: <span id="avgTime">-</span></div>
-                    <div>Schnellste: <span id="minTime">-</span></div>
-                    <div>Längste: <span id="maxTime">-</span></div>
-                </div>
-            </div>
-            <button id="downloadCSV">CSV herunterladen</button>
-            <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
-        </div>
-
-        <div class="view profile-view">
-            <div class="info-card">
-                <div class="version-info">
-                    <div class="version-header">
-                        <p class="version-badge">Version 1.3.3</p>
+            <div class="view admin-view">
+                <div class="stats-card">
+                    <h2>Statistiken</h2>
+                    <canvas id="statsChart"></canvas>
+                    <div class="stats-summary">
+                        <div>Durchschnitt: <span id="avgTime">-</span></div>
+                        <div>Schnellste: <span id="minTime">-</span></div>
+                        <div>Längste: <span id="maxTime">-</span></div>
                     </div>
                 </div>
-                
-                <div class="changelog-section">
-                    <h3>Letzte Änderungen</h3>
-                    <div class="changelog-entry current">
-                        <h4>Version 1.3.3 (25.02.2024)</h4>
-                        <ul>
-                            <li>📊 Statistische Auswertungen hinzugefügt</li>
-                            <li>⚡ Echtzeit-Synchronisation zwischen Geräten</li>
-                            <li>🔄 Automatische Aktualisierung alle 30 Sekunden</li>
-                            <li>📱 Aktualisierung beim Tab-Wechsel</li>
-                            <li>🔌 Verbesserte Redis-Datenpersistenz</li>
-                            <li>🚀 Optimierte Ladezeiten durch Versionierung</li>
-                            <li>🎨 Aufgeräumte Benutzeroberfläche</li>
-                        </ul>
+                <button id="downloadCSV">CSV herunterladen</button>
+                <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
+            </div>
+
+            <div class="view profile-view">
+                <div class="info-card">
+                    <div class="version-info">
+                        <div class="version-header">
+                            <p class="version-badge">Version 1.3.3</p>
+                        </div>
                     </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.3.1 (20.02.2024)</h4>
-                        <ul>
-                            <li>🛠️ Optimierte Redis-Integration</li>
-                            <li>🎯 Stabilere Datenspeicherung</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.3.0 (15.02.2024)</h4>
-                        <ul>
-                            <li>✅ Kontrollergebnis-Erfassung (Grün/Orange)</li>
-                            <li>🎯 Fokussierte Trägermedien-Auswahl</li>
-                            <li>🚦 Farbkodierte Status-Anzeige</li>
-                            <li>📊 Verbesserte CSV-Exports</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.2.1 (14.02.2024)</h4>
-                        <ul>
-                            <li>🔧 Fehlerbehebungen in der Navigation</li>
-                            <li>📱 Verbesserte mobile Ansicht</li>
-                            <li>🎨 UI/UX Optimierungen</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.2.0 (13.02.2024)</h4>
-                        <ul>
-                            <li>🔄 Neue Tab-Navigation</li>
-                            <li>📊 Admin-Bereich für CSV-Export</li>
-                            <li>🎨 Moderneres Design</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.1.1 (12.02.2024)</h4>
-                        <ul>
-                            <li>🔧 Performance-Optimierungen</li>
-                            <li>📱 PWA-Funktionalität verbessert</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.1.0 (11.02.2024)</h4>
-                        <ul>
-                            <li>💾 Erste Redis-Integration</li>
-                            <li>📱 PWA-Support</li>
-                            <li>🔄 Offline-Funktionalität</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.0.2 (10.02.2024)</h4>
-                        <ul>
-                            <li>🔧 Bugfixes im Timer</li>
-                            <li>📱 iOS Kompatibilität verbessert</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.0.1 (09.02.2024)</h4>
-                        <ul>
-                            <li>🎨 Design-Anpassungen</li>
-                            <li>🔧 Kleine Fehlerbehebungen</li>
-                        </ul>
-                    </div>
-                    <div class="changelog-entry">
-                        <h4>Version 1.0.0 (08.02.2024)</h4>
-                        <ul>
-                            <li>🚀 Erste öffentliche Version</li>
-                            <li>⏱️ Basis-Timer-Funktionalität</li>
-                            <li>📝 Einfache Messung-Erfassung</li>
-                        </ul>
+                    
+                    <div class="changelog-section">
+                        <h3>Letzte Änderungen</h3>
+                        <div class="changelog-entry current">
+                            <h4>Version 1.3.3 (25.02.2024)</h4>
+                            <ul>
+                                <li>📊 Statistische Auswertungen hinzugefügt</li>
+                                <li>⚡ Echtzeit-Synchronisation zwischen Geräten</li>
+                                <li>🔄 Automatische Aktualisierung alle 30 Sekunden</li>
+                                <li>📱 Aktualisierung beim Tab-Wechsel</li>
+                                <li>🔌 Verbesserte Redis-Datenpersistenz</li>
+                                <li>🚀 Optimierte Ladezeiten durch Versionierung</li>
+                                <li>🎨 Aufgeräumte Benutzeroberfläche</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.3.1 (20.02.2024)</h4>
+                            <ul>
+                                <li>🛠️ Optimierte Redis-Integration</li>
+                                <li>🎯 Stabilere Datenspeicherung</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.3.0 (15.02.2024)</h4>
+                            <ul>
+                                <li>✅ Kontrollergebnis-Erfassung (Grün/Orange)</li>
+                                <li>🎯 Fokussierte Trägermedien-Auswahl</li>
+                                <li>🚦 Farbkodierte Status-Anzeige</li>
+                                <li>📊 Verbesserte CSV-Exports</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.2.1 (14.02.2024)</h4>
+                            <ul>
+                                <li>🔧 Fehlerbehebungen in der Navigation</li>
+                                <li>📱 Verbesserte mobile Ansicht</li>
+                                <li>🎨 UI/UX Optimierungen</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.2.0 (13.02.2024)</h4>
+                            <ul>
+                                <li>🔄 Neue Tab-Navigation</li>
+                                <li>📊 Admin-Bereich für CSV-Export</li>
+                                <li>🎨 Moderneres Design</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.1.1 (12.02.2024)</h4>
+                            <ul>
+                                <li>🔧 Performance-Optimierungen</li>
+                                <li>📱 PWA-Funktionalität verbessert</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.1.0 (11.02.2024)</h4>
+                            <ul>
+                                <li>💾 Erste Redis-Integration</li>
+                                <li>📱 PWA-Support</li>
+                                <li>🔄 Offline-Funktionalität</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.0.2 (10.02.2024)</h4>
+                            <ul>
+                                <li>🔧 Bugfixes im Timer</li>
+                                <li>📱 iOS Kompatibilität verbessert</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.0.1 (09.02.2024)</h4>
+                            <ul>
+                                <li>🎨 Design-Anpassungen</li>
+                                <li>🔧 Kleine Fehlerbehebungen</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.0.0 (08.02.2024)</h4>
+                            <ul>
+                                <li>🚀 Erste öffentliche Version</li>
+                                <li>⏱️ Basis-Timer-Funktionalität</li>
+                                <li>📝 Einfache Messung-Erfassung</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="mediaDialog" class="media-dialog hidden">
-            <h3>Trägermedium wählen</h3>
-            <div class="media-buttons">
-                <button class="media-button" data-medium="SwissPass">SwissPass</button>
-                <button class="media-button" data-medium="E-Ticket">E-Ticket</button>
-                <button class="media-button" data-medium="E-Ticket mit Ausweisprüfung">E-Ticket mit Ausweisprüfung</button>
-                <button class="media-button cancel" data-medium="Abgebrochen">Abbrechen</button>
+            <div id="mediaDialog" class="media-dialog hidden">
+                <h3>Trägermedium wählen</h3>
+                <div class="media-buttons">
+                    <button class="media-button" data-medium="SwissPass">SwissPass</button>
+                    <button class="media-button" data-medium="E-Ticket">E-Ticket</button>
+                    <button class="media-button" data-medium="E-Ticket mit Ausweisprüfung">E-Ticket mit Ausweisprüfung</button>
+                    <button class="media-button cancel" data-medium="Abgebrochen">Abbrechen</button>
+                </div>
             </div>
-        </div>
 
-        <div id="resultDialog" class="media-dialog hidden">
-            <h3>Kontrollergebnis</h3>
-            <div class="media-buttons">
-                <button class="media-button result-green" data-result="grün">
-                    <i class="fas fa-check-circle"></i> Grün
-                </button>
-                <button class="media-button result-orange" data-result="orange">
-                    <i class="fas fa-exclamation-circle"></i> Orange
-                </button>
-                <button class="media-button cancel" data-result="Abgebrochen">Abbrechen</button>
+            <div id="resultDialog" class="media-dialog hidden">
+                <h3>Kontrollergebnis</h3>
+                <div class="media-buttons">
+                    <button class="media-button result-green" data-result="grün">
+                        <i class="fas fa-check-circle"></i> Grün
+                    </button>
+                    <button class="media-button result-orange" data-result="orange">
+                        <i class="fas fa-exclamation-circle"></i> Orange
+                    </button>
+                    <button class="media-button cancel" data-result="Abgebrochen">Abbrechen</button>
+                </div>
             </div>
         </div>
     </div>

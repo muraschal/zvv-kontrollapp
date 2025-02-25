@@ -425,3 +425,82 @@ button:active {
     margin-top: 20px;
     text-align: center;
 }
+
+@keyframes controlBorder {
+    0% {
+        box-shadow: 0 0 0 0px rgba(4, 121, 204, 0.2);
+        border-image: linear-gradient(
+            45deg,
+            rgba(4, 121, 204, 0.8),
+            rgba(35, 156, 54, 0.8),
+            rgba(229, 0, 125, 0.8)
+        ) 1;
+    }
+    50% {
+        box-shadow: 0 0 30px 0px rgba(4, 121, 204, 0.4);
+        border-image: linear-gradient(
+            180deg,
+            rgba(35, 156, 54, 0.8),
+            rgba(229, 0, 125, 0.8),
+            rgba(4, 121, 204, 0.8)
+        ) 1;
+    }
+    100% {
+        box-shadow: 0 0 0 0px rgba(4, 121, 204, 0.2);
+        border-image: linear-gradient(
+            315deg,
+            rgba(229, 0, 125, 0.8),
+            rgba(4, 121, 204, 0.8),
+            rgba(35, 156, 54, 0.8)
+        ) 1;
+    }
+}
+
+.container.active-control {
+    position: relative;
+    border: 2px solid transparent;
+    animation: controlBorder 3s infinite;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.container.active-control::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(45deg, #0479cc, #239c36, #e5007d);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@keyframes breathe {
+    0% {
+        box-shadow: 0 0 0 0 rgba(4, 121, 204, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px 10px rgba(4, 121, 204, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(4, 121, 204, 0.1);
+    }
+}
+
+.breathing-container {
+    position: relative;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.breathing-container.active-control {
+    animation: breathe 3s infinite;
+    background: linear-gradient(
+        45deg,
+        rgba(4, 121, 204, 0.05),
+        rgba(35, 156, 54, 0.05),
+        rgba(229, 0, 125, 0.05)
+    );
+}
