@@ -478,16 +478,16 @@ button:active {
 
 @keyframes breathe {
     0% {
-        box-shadow: 0 0 20px 0px rgba(4, 121, 204, 0.3);
-        border: 2px solid rgba(4, 121, 204, 0.5);
+        box-shadow: 0 0 30px 0px rgba(4, 121, 204, 0.5);
+        border: 3px solid rgba(4, 121, 204, 0.8);
     }
     50% {
-        box-shadow: 0 0 40px 10px rgba(35, 156, 54, 0.4);
-        border: 2px solid rgba(35, 156, 54, 0.6);
+        box-shadow: 0 0 50px 15px rgba(35, 156, 54, 0.6);
+        border: 3px solid rgba(35, 156, 54, 0.9);
     }
     100% {
-        box-shadow: 0 0 20px 0px rgba(229, 0, 125, 0.3);
-        border: 2px solid rgba(229, 0, 125, 0.5);
+        box-shadow: 0 0 30px 0px rgba(229, 0, 125, 0.5);
+        border: 3px solid rgba(229, 0, 125, 0.8);
     }
 }
 
@@ -501,14 +501,13 @@ button:active {
 
 .timer-card.active-control {
     animation: breathe 3s infinite;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     background: linear-gradient(
         45deg,
-        rgba(4, 121, 204, 0.1),
-        rgba(35, 156, 54, 0.1),
-        rgba(229, 0, 125, 0.1)
+        rgba(4, 121, 204, 0.15),
+        rgba(35, 156, 54, 0.15),
+        rgba(229, 0, 125, 0.15)
     );
+    transform: scale(1.02);
 }
 
 .app-container {
