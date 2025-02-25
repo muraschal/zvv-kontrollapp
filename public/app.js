@@ -604,7 +604,9 @@ function updateStatistics() {
                         // Nur jeden 5. Tick anzeigen im Liniendiagramm und Farben für Trägermedien im Balkendiagramm
                         callback: function(val, index) {
                             if (chartType === 'line') {
-                                return index % 5 === 0 ? this.getLabelForValue(val) : '';
+                                // Zeige nur Werte in 5er-Schritten an (1, 5, 10, 15, 20)
+                                const numVal = parseInt(this.getLabelForValue(val));
+                                return numVal === 1 || numVal % 5 === 0 ? numVal : '';
                             }
                             
                             // Für Balkendiagramm: Farben für die Trägermedien setzen
@@ -643,7 +645,7 @@ function updateStatistics() {
                         drawTicks: true
                     },
                     ticks: {
-                        stepSize: 5,
+                        stepSize: 5, // Stellt sicher, dass die Y-Achse in 5er-Schritten angezeigt wird
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
@@ -717,7 +719,7 @@ function calculateTimelineData() {
     
     return {
         data: recentMeasurements.map((m, index) => ({
-            time: `#${index + 1}`,
+            time: `${index + 1}`,
             duration: m.duration,
             medium: m.medium // Speichere das Medium für die Farbzuweisung
         })),
