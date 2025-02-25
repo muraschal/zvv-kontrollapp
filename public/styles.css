@@ -97,8 +97,8 @@ body::before {
 }
 
 .controls {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: center;
     gap: 1rem;
     margin: 1.5rem 0;
 }
@@ -126,11 +126,6 @@ button:active {
 
 #startStop.running {
     background-color: var(--zvv-green);
-}
-
-#reset {
-    background-color: var(--zvv-red);
-    color: var(--zvv-white);
 }
 
 #downloadCSV {
@@ -235,7 +230,9 @@ button:active {
 }
 
 .media-button.cancel {
-    background: var(--zvv-pink);
+    background: var(--zvv-red);
+    color: var(--zvv-white);
+    font-weight: 500;
 }
 
 .media-button.result-green {
