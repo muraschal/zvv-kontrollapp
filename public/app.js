@@ -283,50 +283,58 @@ async function showMediaDialog(duration, result = null) {
         const mediaDialog = document.getElementById('mediaDialog');
         mediaDialog.classList.remove('hidden');
         
+        // Event-Handler für die Medien-Buttons
         const mediaButtons = mediaDialog.querySelectorAll('.media-button');
         mediaButtons.forEach(button => {
             button.onclick = async () => {
                 const medium = button.dataset.medium;
                 mediaDialog.classList.add('hidden');
                 
-                if (medium === 'Abgebrochen') {
-                    overlay.remove();
-                    resetTimer();
-                } else {
-                    // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
-                    showMediaDialog(duration, medium);
-                }
+                // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
+                showMediaDialog(duration, medium);
             };
         });
+        
+        // Event-Handler für den X-Button
+        const closeButton = mediaDialog.querySelector('.close-button');
+        if (closeButton) {
+            closeButton.onclick = () => {
+                mediaDialog.classList.add('hidden');
+                overlay.remove();
+                resetTimer();
+            };
+        }
     } else {
         // Verstecke beide Dialoge zunächst
         document.getElementById('mediaDialog').classList.add('hidden');
         const resultDialog = document.getElementById('resultDialog');
         resultDialog.classList.remove('hidden');
         
+        // Event-Handler für die Ergebnis-Buttons
         const resultButtons = resultDialog.querySelectorAll('.media-button');
         resultButtons.forEach(button => {
             button.onclick = async () => {
-                const kontrollergebnis = button.dataset.result;
+                const resultValue = button.dataset.result;
                 resultDialog.classList.add('hidden');
                 overlay.remove();
                 
-                // Speichern, außer bei Abbruch
-                if (kontrollergebnis === 'Abgebrochen') {
-                    resetTimer();
-                    return;
-                }
-                
-                await saveMeasurement(duration, result, kontrollergebnis);
+                // Speichere die Messung
+                await saveMeasurement(duration, result, resultValue);
+                resetTimer();
                 updateMeasurementsList();
-                
-                // Timer zurücksetzen
-                clearInterval(timer);
-                timerDisplay.textContent = '00.000';
-                startStopBtn.textContent = 'Start';
-                isRunning = false;
+                updateStatistics();
             };
         });
+        
+        // Event-Handler für den X-Button
+        const closeButton = resultDialog.querySelector('.close-button');
+        if (closeButton) {
+            closeButton.onclick = () => {
+                resultDialog.classList.add('hidden');
+                overlay.remove();
+                resetTimer();
+            };
+        }
     }
 } 
 
