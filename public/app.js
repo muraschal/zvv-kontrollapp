@@ -100,39 +100,10 @@ function pad3(number) {
     return number.toString().padStart(3, '0');
 }
 
-function downloadCSV() {
-    // Excel-kompatibles Format mit BOM
-    const BOM = "\uFEFF";
-    const csvContent = "data:text/csv;charset=utf-8," + BOM
-        + "Zeitstempel,Kontrolldauer (Sekunden),Trägermedium,Kontrollergebnis\n"
-        + measurements.map(row => {
-            const date = new Date(row.timestamp);
-            const formattedDate = date.toLocaleString('de-CH', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                timeZone: 'Europe/Zurich'
-            }).replace(/,/g, '');
-            
-            // Gleiche Fallback-Logik wie in der Anzeige
-            const result = (row.result === undefined || row.result === null) ? 'Abgebrochen' : row.result;
-            
-            return `"${formattedDate}",${row.duration},"${row.medium}","${result}"`;
-        }).join("\n");
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    // Debug-Log für CSV-Inhalt
-    console.log('CSV Content:', csvContent);
-    link.setAttribute("download", `kontrollzeiten_${new Date().toISOString().split('T')[0]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
+// CSV Download Handler ersetzen
+document.getElementById('downloadCSV').addEventListener('click', async () => {
+    window.location.href = '/api/measurements/download';
+});
 
 // Service Worker registrieren
 if ('serviceWorker' in navigator) {

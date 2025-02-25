@@ -1,93 +1,46 @@
-# Kontrollzeit-Erfassungs-App
+# ZVV Kontrollapp
 
-## 1. Technologie-Stack
-- **Frontend:** HTML + JavaScript (Vanilla JS)
-- **Backend:** Vercel Serverless Functions
-- **Datenspeicherung:** 
-  - **Online:** Redis (Upstash)
-  - **Offline:** Browser LocalStorage mit Auto-Sync
-- **Hosting:** Vercel
+Eine Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV.
 
-## 2. App-Funktionalitäten
-### Navigation & Interface
-- 📱 Tab-basierte Navigation
-  - Zeitmessung
-  - Admin-Bereich
-  - ZVV-Profil
-- 🎨 Responsive Design mit Footer
-- 💫 Animierte Übergänge
+## Features
+- ⏱️ Präzise Zeitmessung
+- 📱 PWA mit Offline-Support
+- 💾 Redis-basierte Datenspeicherung
+- 📊 CSV-Export der Messungen
+- 🔄 Echtzeit-Synchronisation
 
-### Zeitmessung & Erfassung
-- ⏱️ Start/Stop-Button für Zeitmessung
-- 🔄 Abbruch-Button für Reset
-- 📝 Trägermedien-Auswahl:
-  - SwissPass
-  - E-Ticket
-  - E-Ticket mit Ausweisprüfung
-- 🚦 Kontrollergebnis:
-  - Grün (Gültig)
-  - Orange (Ungültig)
-
-### Datenmanagement
-- 📊 Automatische Speicherung in Redis
-- 💾 Offline-Fähigkeit mit LocalStorage
-- 🔄 Automatische Synchronisation
-- 📥 Excel-kompatible CSV-Exports mit Kontrollergebnis
-- 🗑️ Löschen aller gespeicherten Kontrollen
-
-## 3. Datenstruktur
-Die Messungen werden in Redis als JSON-Objekte gespeichert:
-```json
-{
-  "timestamp": "2024-02-14T15:30:00.000Z",
-  "duration": 12.345,
-  "medium": "SwissPass",
-  "result": "grün",
-  "synced": true
-}
-```
-
-## 4. Installation & Setup
+## Setup
 
 ### Voraussetzungen
-- Node.js (Version 14 oder höher)
-- Upstash Redis Account
+- Node.js
+- Redis (Upstash)
 
-### Lokale Entwicklung
+### Installation
 1. Repository klonen:
-   ```bash
-   git clone https://github.com/muraschal/zvv-kontrollapp.git
-   cd zvv-kontrollapp
-   ```
+```bash
+git clone https://github.com/muraschal/zvv-kontrollapp.git
+cd zvv-kontrollapp
+```
 
 2. Dependencies installieren:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. Umgebungsvariablen setzen:
-   - Erstelle eine `.env` Datei
-   - Füge die Redis-Credentials hinzu:
-     ```
-     UPSTASH_REDIS_REST_URL=deine_redis_url
-     UPSTASH_REDIS_REST_TOKEN=dein_redis_token
-     ```
+3. `.env` Datei erstellen:
+```env
+UPSTASH_REDIS_REST_URL=your_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_redis_token
+PORT=3002
+```
 
-4. Server starten:
-   ```bash
-   npm run dev
-   ```
+4. Development Server starten:
+```bash
+npm run dev
+```
 
-### Deployment
-Die App ist automatisch mit Vercel verbunden und deployed bei jedem Push auf den main Branch.
+## Deployment
+Die App ist auf Vercel deployed und nutzt Upstash Redis für die Datenspeicherung.
 
-## 5. Features
-- **Offline-Fähigkeit**: Funktioniert auch ohne Internetverbindung
-- **Auto-Sync**: Synchronisiert Offline-Daten automatisch
-- **PWA-Support**: Installierbar als Progressive Web App
-- **Responsive Design**: Optimiert für mobile Nutzung
-- **Tab Navigation**: Intuitive Bereichsaufteilung
-- **Verbesserte UI**: Klare visuelle Hierarchie
-
-## 6. Updates & Changelog
-Siehe [CHANGELOG.md](CHANGELOG.md) für eine detaillierte Liste aller Änderungen.
+## Version
+Aktuelle Version: 1.3.2
