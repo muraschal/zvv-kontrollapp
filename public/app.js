@@ -354,15 +354,24 @@ async function deleteAllMeasurements() {
 // Neue Funktion für Statistik-View
 function updateStatistics() {
     const ctx = document.getElementById('statsChart');
+    
+    // Sicherstellen dass Messungen vorhanden sind
+    if (!measurements || measurements.length === 0) {
+        document.getElementById('avgTime').textContent = '-';
+        document.getElementById('minTime').textContent = '-';
+        document.getElementById('maxTime').textContent = '-';
+        return;
+    }
+
     // Existierendes Chart zerstören falls vorhanden
-    if (window.statsChart) {
-        window.statsChart.destroy();
+    if (window.myChart && typeof window.myChart.destroy === 'function') {
+        window.myChart.destroy();
     }
 
     // Daten vorbereiten
     const data = calculateAveragesByMedium();
 
-    window.statsChart = new Chart(ctx, {
+    window.myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: data.map(d => d.medium),
