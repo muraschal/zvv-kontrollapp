@@ -58,6 +58,10 @@ function showView(view) {
     const selectedView = document.querySelector(`.${view}-view`);
     if (selectedView) {
         selectedView.classList.add('active');
+        // Update stats when switching to admin view
+        if (view === 'admin') {
+            updateStatistics();
+        }
     }
 }
 
@@ -345,4 +349,37 @@ async function deleteAllMeasurements() {
             alert('Fehler beim Löschen der Daten');
         }
     }
+} 
+
+// Chart.js einbinden
+import Chart from 'chart.js/auto';
+
+// Neue Funktion für Statistik-View
+function updateStatistics() {
+    const ctx = document.getElementById('statsChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: measurements.map(m => m.medium),
+            datasets: [{
+                label: 'Durchschnittliche Kontrollzeit (Sekunden)',
+                data: calculateAveragesByMedium(),
+                backgroundColor: ['#0479cc', '#34c759', '#ff9500']
+            }]
+        }
+    });
+}
+
+// Durchschnittszeiten berechnen
+function calculateAveragesByMedium() {
+    const groups = {};
+    measurements.forEach(m => {
+        if (!groups[m.medium]) groups[m.medium] = [];
+        groups[m.medium].push(m.duration);
+    });
+    
+    return Object.entries(groups).map(([medium, times]) => ({
+        medium,
+        avg: times.reduce((a,b) => a + b, 0) / times.length
+    }));
 } 

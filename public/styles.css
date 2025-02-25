@@ -132,14 +132,14 @@ button:active {
 }
 
 #downloadCSV {
-    background-color: var(--zvv-pink);
+    background-color: var(--zvv-light-blue);
     color: var(--zvv-white);
     width: 100%;
     margin-top: 1rem;
 }
 
 #downloadCSV:hover {
-    background-color: #c5000d;
+    background-color: #0366ad;
 }
 
 .measurement-item {
@@ -408,4 +408,20 @@ button:active {
 
 .result i {
     font-size: 1.1em;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    text-align: center;
 }

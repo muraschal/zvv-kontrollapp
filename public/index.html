@@ -23,6 +23,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css?v=1.3.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="app.js?v=1.3.2" defer></script>
 </head>
 <body>
@@ -48,6 +49,15 @@
         </div>
 
         <div class="view admin-view">
+            <div class="stats-card">
+                <h2>Statistiken</h2>
+                <canvas id="statsChart"></canvas>
+                <div class="stats-summary">
+                    <div>Durchschnitt: <span id="avgTime">-</span></div>
+                    <div>Schnellste: <span id="minTime">-</span></div>
+                    <div>Längste: <span id="maxTime">-</span></div>
+                </div>
+            </div>
             <button id="downloadCSV">CSV herunterladen</button>
             <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
         </div>
