@@ -48,11 +48,14 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/gfx/zvv_header_element02.json') no-repeat center center;
+    background-image: url('gfx/zvv-bg.png');
     background-size: cover;
-    opacity: 0.08;
-    z-index: -1;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -2;
     pointer-events: none;
+    mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .container {
