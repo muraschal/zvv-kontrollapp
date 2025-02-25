@@ -44,12 +44,19 @@
                 </div>
 
                 <div class="card measurements-card">
-                    <h2>Letzte 5 Kontrollen</h2>
+                    <h2>Letzte 3 Kontrollen</h2>
                     <div id="measurementsList"></div>
                 </div>
             </div>
 
-            <div class="view admin-view">
+            <div class="view list-view">
+                <div class="card measurements-card">
+                    <h2>Alle Kontrollen</h2>
+                    <div id="fullMeasurementsList"></div>
+                </div>
+            </div>
+
+            <div class="view stats-view">
                 <div class="stats-card">
                     <h2>Statistiken</h2>
                     <div class="stats-header">
@@ -96,6 +103,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="view admin-view">
                 <button id="downloadCSV">CSV herunterladen</button>
                 <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
             </div>
@@ -212,14 +222,22 @@
                     <button class="media-button cancel" data-result="Abgebrochen">Abbrechen</button>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <!-- Neue Tab Navigation -->
     <nav class="bottom-tabs">
         <div class="tab active" data-view="timer">
             <i class="fas fa-clock"></i>
-            <span>Zeit</span>
+            <span>Kontrolle</span>
+        </div>
+        <div class="tab" data-view="list">
+            <i class="fas fa-list"></i>
+            <span>Kontrollliste</span>
+        </div>
+        <div class="tab" data-view="stats">
+            <i class="fas fa-chart-bar"></i>
+            <span>Statistiken</span>
         </div>
         <div class="tab" data-view="admin">
             <i class="fas fa-gear"></i>

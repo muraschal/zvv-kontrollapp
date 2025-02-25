@@ -59,6 +59,14 @@ function showView(view) {
     const selectedView = document.querySelector(`.${view}-view`);
     if (selectedView) {
         selectedView.classList.add('active');
+        // Update view specific content
+        if (view === 'timer') {
+            updateMeasurementsList();
+        } else if (view === 'list') {
+            updateFullMeasurementsList();
+        } else if (view === 'stats') {
+            updateStatistics();
+        }
         // Update stats when switching to admin view
         if (view === 'admin') {
             updateStatistics();
@@ -164,56 +172,70 @@ if ('serviceWorker' in navigator) {
 
 function updateMeasurementsList() {
     const measurementsList = document.getElementById('measurementsList');
-    if (!measurementsList) {
-        console.error('Messungsliste nicht gefunden');
-        return;
-    }
+    if (!measurementsList) return;
 
-    // Überprüfen ob Messungen vorhanden sind
     if (measurements.length === 0) {
-        measurementsList.innerHTML = '<div class="no-measurements">Keine Kontrollen in den letzten 5 Messungen</div>';
+        measurementsList.innerHTML = '<div class="no-measurements">Keine Kontrollen vorhanden</div>';
         return;
     }
 
     measurementsList.innerHTML = measurements
-        .slice(-5)
+        .slice(-3)
         .reverse()
-        .map(m => {
-            const date = new Date(m.timestamp);
-            const formattedDate = date.toLocaleString('de-CH', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            const minutes = Math.floor(m.duration / 60);
-            const seconds = Math.floor(m.duration % 60);
-            const milliseconds = Math.floor((m.duration % 1) * 1000);
-            const formattedDuration = `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
-            
-            // Nur Fallback wenn result wirklich undefined oder null ist
-            const result = (m.result === undefined || m.result === null) ? 'Abgebrochen' : m.result;
-            const resultIcon = result === 'grün' ? 'check-circle' : 
-                             result === 'orange' ? 'exclamation-circle' : 
-                             'times-circle';
-            const resultClass = result === 'Abgebrochen' ? 'cancelled' : result;
-            
-            return `
-                <div class="measurement-item ${resultClass}">
-                    <div>Datum: ${formattedDate}</div>
-                    <div>Dauer: ${formattedDuration}</div>
-                    <div>Medium: ${m.medium}</div>
-                    <div class="result ${resultClass}">
-                        <i class="fas fa-${resultIcon}"></i>
-                        Ergebnis: ${result}
-                    </div>
-                </div>
-            `;
-        })
+        .map(m => createMeasurementHTML(m))
         .join('');
-} 
+}
+
+function updateFullMeasurementsList() {
+    const fullList = document.getElementById('fullMeasurementsList');
+    if (!fullList) return;
+    
+    if (measurements.length === 0) {
+        fullList.innerHTML = '<div class="no-measurements">Keine Kontrollen vorhanden</div>';
+        return;
+    }
+    
+    fullList.innerHTML = measurements
+        .slice()
+        .reverse()
+        .map(m => createMeasurementHTML(m))
+        .join('');
+}
+
+function createMeasurementHTML(measurement) {
+    const date = new Date(measurement.timestamp);
+    const formattedDate = date.toLocaleString('de-CH', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    const minutes = Math.floor(measurement.duration / 60);
+    const seconds = Math.floor(measurement.duration % 60);
+    const milliseconds = Math.floor((measurement.duration % 1) * 1000);
+    const formattedDuration = `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
+    
+    // Nur Fallback wenn result wirklich undefined oder null ist
+    const result = (measurement.result === undefined || measurement.result === null) ? 'Abgebrochen' : measurement.result;
+    const resultIcon = result === 'grün' ? 'check-circle' : 
+                     result === 'orange' ? 'exclamation-circle' : 
+                     'times-circle';
+    const resultClass = result === 'Abgebrochen' ? 'cancelled' : result;
+    
+    return `
+        <div class="measurement-item ${resultClass}">
+            <div>Datum: ${formattedDate}</div>
+            <div>Dauer: ${formattedDuration}</div>
+            <div>Medium: ${measurement.medium}</div>
+            <div class="result ${resultClass}">
+                <i class="fas fa-${resultIcon}"></i>
+                Ergebnis: ${result}
+            </div>
+        </div>
+    `;
+}
 
 function resetTimer() {
     if (timer) {
