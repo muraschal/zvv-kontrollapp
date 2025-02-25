@@ -144,6 +144,11 @@ document.getElementById('downloadCSV').addEventListener('click', async () => {
     window.location.href = '/api/measurements/download';
 });
 
+// Excel Download Handler hinzufügen
+document.getElementById('downloadXLS').addEventListener('click', async () => {
+    window.location.href = '/api/measurements/download/excel';
+});
+
 // Service Worker registrieren
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {

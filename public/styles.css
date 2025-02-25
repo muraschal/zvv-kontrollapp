@@ -176,6 +176,14 @@ button:active {
     background-color: #0366ad;
 }
 
+#downloadXLS {
+    background-color: #217346; /* Excel-Grün */
+}
+
+#downloadXLS:hover {
+    background-color: #1e6e41;
+}
+
 .measurement-item {
     background: #f5f5f5;
     border-radius: 8px;
@@ -766,8 +774,33 @@ button:active {
 
 /* Buttons in der Admin-View */
 .admin-view button {
-    width: 100%;
-    margin-bottom: 1rem;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--zvv-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#downloadCSV, #downloadXLS {
+    display: inline-block;
+    min-width: 180px;
+    text-align: center;
+}
+
+#downloadXLS {
+    background-color: #217346; /* Excel-Grün */
+}
+
+#downloadXLS:hover {
+    background-color: #1e6e41;
+}
+
+.admin-view button:hover {
+    background-color: var(--zvv-dark-blue);
 }
 
 .media-dialog h3 {

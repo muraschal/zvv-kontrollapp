@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="version" content="1.3.4">
+    <meta name="version" content="1.3.5">
     <title>ZVV Kontrollapp</title>
     
     <!-- PWA Meta Tags -->
@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ZVV Kontrollapp">
-    <link rel="manifest" href="/manifest.json?v=1.3.4">
+    <link rel="manifest" href="/manifest.json?v=1.3.5">
     <meta name="theme-color" content="#0479cc">
     
     <!-- Favicon -->
@@ -21,17 +21,17 @@
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="styles.css?v=1.3.4">
+    <link rel="stylesheet" href="styles.css?v=1.3.5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="app.js?v=1.3.4" defer></script>
+    <script src="app.js?v=1.3.5" defer></script>
 </head>
 <body>
     <div class="full-page-breathing">
         <div class="header">
             <img src="/gfx/zvv-logo.svg" alt="ZVV Logo" class="zvv-logo">
-            <div class="app-version">Kontroll-App V.1.3.4</div>
+            <div class="app-version">Kontroll-App V.1.3.5</div>
         </div>
 
         <main class="app-container">
@@ -107,6 +107,7 @@
 
             <div class="view admin-view">
                 <button id="downloadCSV">CSV herunterladen</button>
+                <button id="downloadXLS">Excel herunterladen</button>
                 <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
             </div>
 
@@ -118,7 +119,15 @@
                     <div class="changelog-section">
                         <h3>Letzte Änderungen</h3>
                         <div class="changelog-entry current">
-                            <h4>Version 1.3.4 (aktuelle Version)</h4>
+                            <h4>Version 1.3.5 (aktuelle Version)</h4>
+                            <ul>
+                                <li>📊 Excel-Export mit formatierter Tabelle</li>
+                                <li>📈 Dynamische X-Achsenskalierung im Diagramm</li>
+                                <li>🎨 Verbesserte Benutzeroberfläche</li>
+                            </ul>
+                        </div>
+                        <div class="changelog-entry">
+                            <h4>Version 1.3.4 (26.02.2024)</h4>
                             <ul>
                                 <li>🔄 Optimierte Achsenbeschriftung in 5er-Schritten</li>
                                 <li>✨ Verbesserte Dialog-Navigation mit X-Button</li>
