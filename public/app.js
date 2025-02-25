@@ -89,6 +89,7 @@ function toggleTimer() {
         timerDisplay.classList.add('running');
         startStopBtn.classList.add('running');
         document.querySelector('.timer-card').classList.add('active-control');
+        document.querySelector('.background-animation').classList.add('active');
     } else {
         clearInterval(timer);
         const elapsed = Date.now() - startTime;
@@ -96,6 +97,7 @@ function toggleTimer() {
         timerDisplay.classList.remove('running');
         startStopBtn.classList.remove('running');
         document.querySelector('.timer-card').classList.remove('active-control');
+        document.querySelector('.background-animation').classList.remove('active');
         startStopBtn.textContent = 'Start';
         showMediaDialog(duration);
     }
@@ -213,6 +215,7 @@ function resetTimer() {
     timerDisplay.classList.remove('running');
     startStopBtn.classList.remove('running');
     document.querySelector('.timer-card').classList.remove('active-control');
+    document.querySelector('.background-animation').classList.remove('active');
     isRunning = false;
 }
 
