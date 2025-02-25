@@ -190,6 +190,12 @@ function updateFullMeasurementsList() {
     const fullList = document.getElementById('fullMeasurementsList');
     if (!fullList) return;
     
+    // Aktualisiere die Gesamtanzahl der Kontrollen
+    const totalCountElement = document.getElementById('totalControlsCount');
+    if (totalCountElement) {
+        totalCountElement.textContent = measurements.length > 0 ? `(Total ${measurements.length})` : '';
+    }
+    
     if (measurements.length === 0) {
         fullList.innerHTML = '<div class="no-measurements">Keine Kontrollen vorhanden</div>';
         return;
