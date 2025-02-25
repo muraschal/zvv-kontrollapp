@@ -558,7 +558,7 @@ window.addEventListener('DOMContentLoaded', () => {
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        path: '/gfx/zvv_animation-01.json',
+        path: '/gfx/zvv-animation-01.json',
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice',
             className: 'background-animation'
