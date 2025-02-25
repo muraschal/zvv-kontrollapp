@@ -283,7 +283,7 @@ button:active {
 }
 
 .delete-button {
-    background-color: #dc3545;
+    background-color: var(--zvv-red);
     color: white;
     width: 100%;
     margin: 1rem 0;
@@ -433,11 +433,82 @@ button:active {
 }
 
 .stats-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem 2rem;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.metrics-card, .chart-card {
+    margin-bottom: 1.5rem;
+}
+
+.stats-view {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stats-header {
+    display: none;
+}
+
+#statsChart {
+    width: 100%;
+    max-height: 300px;
+    margin: 1rem 0;
+}
+
+.chart-controls {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.chart-title {
+    text-align: center;
+    color: var(--text-gray);
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.toggle-button {
+    background-color: var(--zvv-blue);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.toggle-button i {
+    font-size: 1.1rem;
+}
+
+.stats-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-label {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.metric-value {
+    color: var(--text-black);
+    font-size: 1.2rem;
+    font-family: "ZVV Brown Narrow S Web Bold", sans-serif;
 }
 
 /* Container für das Chart */
@@ -553,111 +624,10 @@ button:active {
     padding-bottom: calc(60px + 4rem);
 }
 
-.stats-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
 .total-controls {
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--text-gray);
-}
-
-.toggle-button {
-    background: var(--zvv-blue);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-}
-
-.toggle-button i {
-    margin-right: 0.5rem;
-}
-
-.stats-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin: 1.5rem 0 1rem 0;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-}
-
-.metric {
-    text-align: center;
-}
-
-.metric-label {
-    color: var(--text-black);
-    font-size: 1rem;
-    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.metric-value {
-    color: var(--text-gray);
-    font-size: 1.5rem;
-    font-weight: 500;
-    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    display: block;
-}
-
-/* Buttons in der Admin-View */
-.admin-view button {
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-.delete-button {
-    background-color: var(--zvv-red);
-    color: white;
-}
-
-.measurements-card h2,
-.media-dialog h3,
-.stats-card h2,
-.stats-card h3 {
-    color: var(--text-black);
-    font-size: 1.5rem;
-    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    margin-bottom: 0.5rem;
-}
-
-.stats-summary div::after,
-.metric-label::after {
-    content: none;
-}
-
-.stats-summary,
-.stats-metrics {
-    text-align: center;
-}
-
-.stats-summary span {
-    color: var(--text-gray);
-    font-weight: 500;
-}
-
-.measurements-card h2,
-.media-dialog h3,
-.stats-card h2 {
-    color: var(--text-black);
-    font-size: 1.5rem;
-    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    margin-bottom: 0.5rem;
-}
-
-.chart-title {
-    color: var(--text-black);
-    font-size: 1.2rem;
-    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    margin: 1rem 0;
-    text-align: center;
 }
 
 .background-animation {
@@ -720,81 +690,40 @@ button:active {
     }
 }
 
-.stats-view {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.stats-summary div::after,
+.metric-label::after {
+    content: none;
 }
 
-.stats-card {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+.stats-summary,
+.stats-metrics {
+    text-align: center;
 }
 
-.metrics-card {
-    margin-bottom: 0;
+.stats-summary span {
+    color: var(--text-gray);
+    font-weight: 500;
 }
 
-.chart-card {
-    display: flex;
-    flex-direction: column;
-}
-
-.chart-controls {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
+.measurements-card h2,
+.media-dialog h3,
+.stats-card h2 {
+    color: var(--text-black);
+    font-size: 1.5rem;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    margin-bottom: 0.5rem;
 }
 
 .chart-title {
-    text-align: center;
-    color: var(--text-gray);
-    margin: 1rem 0;
-    font-size: 1.1rem;
-}
-
-#statsChart {
-    width: 100%;
-    max-height: 300px;
-    margin: 1rem 0;
-}
-
-.toggle-button {
-    background-color: var(--zvv-blue);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-}
-
-.toggle-button i {
-    font-size: 1.1rem;
-}
-
-.stats-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.metric {
-    text-align: center;
-}
-
-.metric-label {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-    margin-bottom: 0.25rem;
-}
-
-.metric-value {
     color: var(--text-black);
     font-size: 1.2rem;
-    font-family: "ZVV Brown Narrow S Web Bold", sans-serif;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+/* Buttons in der Admin-View */
+.admin-view button {
+    width: 100%;
+    margin-bottom: 1rem;
 }

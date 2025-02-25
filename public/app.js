@@ -409,7 +409,6 @@ async function deleteAllMeasurements() {
 // Neue Funktion für Statistik-View
 function updateStatistics() {
     const ctx = document.getElementById('statsChart');
-    document.getElementById('totalControls').textContent = measurements.length;
     
     // Sicherstellen dass Messungen vorhanden sind
     if (!measurements || measurements.length === 0) {
