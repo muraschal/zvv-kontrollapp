@@ -327,20 +327,13 @@ button:active {
 
 .changelog-entry ul {
     list-style-type: none;
-    padding-left: 1rem;
+    padding-left: 0;
 }
 
 .changelog-entry ul li {
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 0;
     margin-bottom: 0.3rem;
-}
-
-.changelog-entry ul li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--zvv-light-blue);
 }
 
 .changelog-entry.current {
