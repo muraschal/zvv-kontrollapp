@@ -240,6 +240,10 @@ async function showMediaDialog(duration, result = null) {
                     return;
                 }
                 
+                // Debug-Log
+                console.log('Selected result:', kontrollergebnis);
+                console.log('Medium:', result);
+                
                 await saveMeasurement(duration, result, kontrollergebnis);
                 updateMeasurementsList();
                 resetTimer();
@@ -285,6 +289,9 @@ async function syncOfflineMeasurements() {
 
 // Modifizierte saveMeasurement Funktion
 async function saveMeasurement(duration, medium, result) {
+    // Debug-Log
+    console.log('Saving measurement:', { duration, medium, result });
+    
     const measurement = {
         timestamp: new Date().toISOString(),
         duration: parseFloat(duration.toFixed(3)),
@@ -304,6 +311,9 @@ async function saveMeasurement(duration, medium, result) {
         }
         
         const savedMeasurement = await response.json();
+        // Debug-Log
+        console.log('Saved measurement:', savedMeasurement);
+        
         measurements.push(savedMeasurement);
         updateMeasurementsList();
         
