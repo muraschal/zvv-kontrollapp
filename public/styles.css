@@ -148,8 +148,10 @@ button:active {
 }
 
 #startStop {
-    background-color: var(--zvv-green);
+    background-color: var(--zvv-blue);
     color: var(--zvv-white);
+    width: 180px;
+    min-width: 180px;
 }
 
 #startStop.running {
