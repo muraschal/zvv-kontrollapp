@@ -66,11 +66,7 @@ function showView(view) {
             updateFullMeasurementsList();
         } else if (view === 'stats') {
             updateStatistics();
-        }
-        // Update stats when switching to admin view
-        if (view === 'admin') {
-            updateStatistics();
-            // Re-attach event listener for chart toggle
+            // Event-Listener für Chart-Toggle hinzufügen
             const toggleBtn = document.getElementById('toggleChart');
             if (toggleBtn) {
                 toggleBtn.onclick = () => {
@@ -83,6 +79,10 @@ function showView(view) {
                     updateStatistics();
                 };
             }
+        }
+        // Update stats when switching to admin view
+        if (view === 'admin') {
+            updateStatistics();
         }
     }
 }
