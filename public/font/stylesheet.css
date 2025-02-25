@@ -1,0 +1,96 @@
+/*
+ * Legal Disclaimer
+ *
+  * These web fonts are licensed exclusively for use on the following:
+ * Web domains belonging to this customer.
+ *
+ * It is strictly forbidden to download or use these fonts on any other website domain or media.
+    
+ *
+ * While the @font-face statements below may be modified by the client, this
+ * disclaimer may not be removed.
+ *
+ * Lineto.com, 2024
+ */
+
+
+/*
+ *
+ * INSTRUCTIONS
+ *
+ * Copy the Legal Disclaimer and the @font-faces statements to your regular CSS file.
+ * The fonts folder(s) should be placed relative to the regular CSS file.
+ *
+ */
+
+@font-face {
+	font-family: "ZVV Brown Narrow S Web Regular";
+	src:url("ZVVBrownNarrowSWeb-Regular.woff2") format("woff2"),
+	    url("ZVVBrownNarrowSWeb-Regular.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow S Web Italic";
+	src:url("ZVVBrownNarrowSWeb-Italic.woff2") format("woff2"),
+	    url("ZVVBrownNarrowSWeb-Italic.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow S Web Bold";
+	src:url("ZVVBrownNarrowSWeb-Bold.woff2") format("woff2"),
+	    url("ZVVBrownNarrowSWeb-Bold.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow S Web Bold Italic";
+	src:url("ZVVBrownNarrowSWeb-BoldItalic.woff2") format("woff2"),
+	    url("ZVVBrownNarrowSWeb-BoldItalic.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow S Web Black";
+	src:url("ZVVBrownNarrowSWeb-Black.woff2") format("woff2"),
+	    url("ZVVBrownNarrowSWeb-Black.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow S Web Black Italic";
+	src:url("ZVVBrownNarrowSWeb-BlackItalic.woff2") format("woff2"),
+	    url("ZVVBrownNarrowSWeb-BlackItalic.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow Web Regular";
+	src:url("ZVVBrownNarrowWeb-Regular.woff2") format("woff2"),
+	    url("ZVVBrownNarrowWeb-Regular.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow Web Italic";
+	src:url("ZVVBrownNarrowWeb-Italic.woff2") format("woff2"),
+	    url("ZVVBrownNarrowWeb-Italic.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow Web Bold";
+	src:url("ZVVBrownNarrowWeb-Bold.woff2") format("woff2"),
+	    url("ZVVBrownNarrowWeb-Bold.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow Web Bold Italic";
+	src:url("ZVVBrownNarrowWeb-BoldItalic.woff2") format("woff2"),
+	    url("ZVVBrownNarrowWeb-BoldItalic.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow Web Black";
+	src:url("ZVVBrownNarrowWeb-Black.woff2") format("woff2"),
+	    url("ZVVBrownNarrowWeb-Black.woff") format("woff");
+}
+
+@font-face {
+	font-family: "ZVV Brown Narrow Web Black Italic";
+	src:url("ZVVBrownNarrowWeb-BlackItalic.woff2") format("woff2"),
+	    url("ZVVBrownNarrowWeb-BlackItalic.woff") format("woff");
+}
