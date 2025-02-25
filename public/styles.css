@@ -16,7 +16,7 @@
 }
 
 body {
-    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
     background-color: var(--zvv-gray);
     color: var(--zvv-blue);
     line-height: 1.6;
@@ -71,7 +71,7 @@ body::before {
 
 .header h1 {
     font-size: 1.5rem;
-    font-weight: 500;
+    font-family: "ZVV Brown Narrow S Web Bold", sans-serif;
     margin: 0;
     line-height: 1;
     padding-top: 1px;
@@ -87,7 +87,7 @@ body::before {
 
 .timer {
     font-size: 3.5rem;
-    font-weight: bold;
+    font-family: "ZVV Brown Narrow S Web Bold", sans-serif;
     text-align: center;
     font-variant-numeric: tabular-nums;
     color: var(--zvv-blue);
@@ -590,3 +590,6 @@ button:active {
     background-color: var(--zvv-red);
     color: white;
 }
+
+/* ZVV Font-Einbindung */
+@import url('font/stylesheet.css');
