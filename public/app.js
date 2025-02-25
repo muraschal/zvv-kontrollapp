@@ -407,9 +407,7 @@ function updateStatistics() {
                 : chartData.data.map(d => d.time),
             datasets: [
                 {
-                    label: chartType === 'bar' 
-                        ? 'Durchschnittliche Kontrollzeit'
-                        : 'Kontrolldauer',
+                    label: ' ', // Leeres Label für die Legende
                     data: chartType === 'bar'
                         ? chartData.map(d => d.avg.toFixed(2))
                         : chartData.data.map(d => d.duration),
@@ -422,6 +420,11 @@ function updateStatistics() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
             scales: {
                 x: {
                     display: true,

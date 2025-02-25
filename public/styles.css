@@ -310,9 +310,6 @@ button:active {
 }
 
 .version-info {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
 }
 
 .version-header {
@@ -447,7 +444,7 @@ button:active {
 /* Container für das Chart */
 #statsChart {
     width: 100%;
-    height: 300px !important;
+    height: 450px !important;
     margin-bottom: 2rem;
 }
 
@@ -654,4 +651,12 @@ button:active {
     font-size: 1.5rem;
     font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
     margin-bottom: 0.5rem;
+}
+
+.chart-title {
+    color: var(--text-black);
+    font-size: 1.2rem;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    margin: 1rem 0;
+    text-align: center;
 }
