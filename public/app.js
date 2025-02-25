@@ -90,7 +90,10 @@ function toggleTimer() {
         startStopBtn.classList.add('running');
         document.querySelector('.full-page-breathing').classList.add('active-control');
         const animation = document.querySelector('.background-animation');
-        if (animation) animation.classList.add('active');
+        if (animation) {
+            animation.classList.remove('fade-out');
+            animation.classList.add('active');
+        }
     } else {
         clearInterval(timer);
         const elapsed = Date.now() - startTime;
@@ -99,7 +102,12 @@ function toggleTimer() {
         startStopBtn.classList.remove('running');
         document.querySelector('.full-page-breathing').classList.remove('active-control');
         const animation = document.querySelector('.background-animation');
-        if (animation) animation.classList.remove('active');
+        if (animation) {
+            animation.classList.add('fade-out');
+            setTimeout(() => {
+                animation.classList.remove('active', 'fade-out');
+            }, 500);
+        }
         startStopBtn.textContent = 'Start';
         showMediaDialog(duration);
     }
