@@ -335,8 +335,6 @@ async function deleteAllMeasurements() {
             
             measurements = [];
             updateMeasurementsList();
-            localStorage.removeItem('measurements');
-            localStorage.removeItem('offlineMeasurements');  // Auch Offline-Daten löschen
             
         } catch (error) {
             console.error('Fehler beim Löschen:', error);
