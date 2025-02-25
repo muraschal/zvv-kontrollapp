@@ -593,12 +593,26 @@ function updateStatistics() {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
                         },
-                        // Nur jeden 5. Tick anzeigen im Liniendiagramm
+                        // Nur jeden 5. Tick anzeigen im Liniendiagramm und Farben für Trägermedien im Balkendiagramm
                         callback: function(val, index) {
                             if (chartType === 'line') {
                                 return index % 5 === 0 ? this.getLabelForValue(val) : '';
                             }
-                            return this.getLabelForValue(val);
+                            
+                            // Für Balkendiagramm: Farben für die Trägermedien setzen
+                            const label = this.getLabelForValue(val);
+                            if (chartType === 'bar') {
+                                if (label === 'SwissPass') {
+                                    this.color = '#c51416'; // SwissPass Rot
+                                } else if (label === 'E-Ticket') {
+                                    this.color = '#8a2be2'; // E-Ticket Violett
+                                } else if (label === 'E-Ticket mit Ausweisprüfung') {
+                                    this.color = '#ff69b4'; // E-Ticket mit Ausweis Pink
+                                } else {
+                                    this.color = '#000000'; // Schwarz als Fallback
+                                }
+                            }
+                            return label;
                         }
                     },
                     title: {
