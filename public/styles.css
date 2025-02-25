@@ -481,10 +481,11 @@ button:active {
 }
 
 .chart-title {
-    text-align: center;
-    color: var(--text-gray);
+    color: var(--text-black);
+    font-size: 1.2rem;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
     margin: 1rem 0;
-    font-size: 1.1rem;
+    text-align: left;
 }
 
 .toggle-button {
@@ -733,7 +734,7 @@ button:active {
     font-size: 1.2rem;
     font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
     margin: 1rem 0;
-    text-align: center;
+    text-align: left;
 }
 
 /* Buttons in der Admin-View */

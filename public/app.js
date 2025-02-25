@@ -548,6 +548,13 @@ function updateStatistics() {
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
+                        },
+                        // Nur jeden 5. Tick anzeigen im Liniendiagramm
+                        callback: function(val, index) {
+                            if (chartType === 'line') {
+                                return index % 5 === 0 ? this.getLabelForValue(val) : '';
+                            }
+                            return this.getLabelForValue(val);
                         }
                     },
                     title: {
@@ -556,7 +563,8 @@ function updateStatistics() {
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
-                        }
+                        },
+                        align: 'start'
                     }
                 },
                 y: {
@@ -569,7 +577,7 @@ function updateStatistics() {
                         drawTicks: true
                     },
                     ticks: {
-                        stepSize: 2,
+                        stepSize: 5,
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
@@ -581,7 +589,8 @@ function updateStatistics() {
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
-                        }
+                        },
+                        align: 'start'
                     }
                 }
             }
@@ -607,8 +616,15 @@ function updateSummaryStats() {
     document.getElementById('minTime').textContent = `${min.toFixed(2)}s`;
     document.getElementById('maxTime').textContent = `${max.toFixed(2)}s`;
     document.getElementById('medianTime').textContent = median.toFixed(2) + 's';
-    document.getElementById('greenCount').textContent = greenCount;
-    document.getElementById('orangeCount').textContent = orangeCount;
+    
+    // Grün und Orange mit entsprechenden Farben anzeigen
+    const greenElement = document.getElementById('greenCount');
+    greenElement.textContent = greenCount;
+    greenElement.style.color = 'var(--zvv-green)';
+    
+    const orangeElement = document.getElementById('orangeCount');
+    orangeElement.textContent = orangeCount;
+    orangeElement.style.color = '#ff9800';
 }
 
 // Durchschnittszeiten berechnen
