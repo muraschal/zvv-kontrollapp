@@ -1,20 +1,20 @@
 # ZVV Kontrollapp
 
-Eine Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV.
+Eine Progressive Web App (PWA) zur Zeitmessung von Billett-Kontrollen.
+
+## Features
+
+- Präzise Zeitmessung von Kontrollen
+- Erfassung des Trägermediums (SwissPass, E-Ticket, etc.)
+- Erfassung des Kontrollergebnisses (grün/orange)
+- Statistiken und Auswertungen
+- Offline-Funktionalität
+- Installation als App möglich
+- Visuelle Rückmeldung durch Farben und Animationen
+- Dynamischer Hintergrund während aktiver Kontrolle
 
 ## Zugriff
 Die App ist unter [kontrolle.zvv.ch](https://kontrolle.zvv.ch) erreichbar.
-
-## Features
-- ⏱️ Präzise Zeitmessung
-- 📱 PWA mit Offline-Support
-- 💾 Redis-basierte Datenspeicherung
-- 📊 CSV-Export der Messungen
-- 🔄 Echtzeit-Synchronisation
-- 📈 Statistische Auswertungen
-  - Durchschnittszeiten pro Medium
-  - Min/Max/Durchschnitt aller Kontrollen
-  - Visualisierung via Chart.js
 
 ## Technische Details
 
@@ -37,22 +37,19 @@ GET    /api/measurements/download  # CSV-Export aller Messungen
 ```
 
 ### Technologie-Stack
-- **Frontend:** Vanilla JavaScript, HTML5, CSS3
-- **Backend:** Node.js, Express
-- **Datenbank:** Upstash Redis
+- **Frontend:** Vanilla JavaScript, CSS3
+- **Backend:** Node.js mit Express
+- **Datenbank:** Redis
 - **Hosting:** Vercel
 - **Features:**
-  - Service Worker für Offline-Funktionalität
-  - Auto-Sync bei Netzwerk-Wiederherstellung
-  - Real-time Updates zwischen Geräten
-  - Excel-kompatible CSV-Exports
-  - Statistische Auswertungen mit Chart.js
+  - PWA mit Service Worker
+  - Lottie Animationen für dynamische Effekte
 
 ## Setup
 
 ### Voraussetzungen
 - Node.js
-- Redis (Upstash)
+- Redis
 
 ### Installation
 1. Repository klonen:
@@ -66,21 +63,24 @@ cd zvv-kontrollapp
 npm install
 ```
 
-3. `.env` Datei erstellen:
-```env
-UPSTASH_REDIS_REST_URL=your_redis_url
-UPSTASH_REDIS_REST_TOKEN=your_redis_token
-PORT=3002
+3. Redis Server starten:
+```bash
+redis-server
 ```
 
-4. Development Server starten:
+4. App starten:
 ```bash
-npm run dev
+npm start
 ```
+
+## Entwicklung
+
+- `npm run dev` für Entwicklungsserver
+- `npm run build` für Produktions-Build
 
 ## Die Geschichte
 
-### 💡 Ursprung & Vision
+### �� Ursprung & Vision
 Die ZVV Kontrollapp entstand aus einem praktischen Bedürfnis: Die präzise Erfassung von Kontrollzeiten im öffentlichen Verkehr. Was als einfacher Timer begann, entwickelte sich zu einer vollwertigen Progressive Web App.
 
 ### 🛠 Technische Evolution
