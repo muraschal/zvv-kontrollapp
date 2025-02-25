@@ -209,7 +209,7 @@ function resetTimer() {
         clearInterval(timer);
         timer = null;
     }
-    timerDisplay.textContent = '00:00:00.000';
+    timerDisplay.textContent = '00:00.000';
     timerDisplay.classList.remove('running');
     startStopBtn.classList.remove('running');
     document.querySelector('.timer-card').classList.remove('active-control');
@@ -271,7 +271,7 @@ async function showMediaDialog(duration, result = null) {
                 
                 // Timer zurücksetzen
                 clearInterval(timer);
-                timerDisplay.textContent = '00:00:00.000';
+                timerDisplay.textContent = '00:00.000';
                 startStopBtn.textContent = 'Start';
                 isRunning = false;
             };
