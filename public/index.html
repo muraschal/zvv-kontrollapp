@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="card measurements-card">
-                    <h2>Letzte Kontrollen</h2>
+                    <h2>Letzte 5 Kontrollen</h2>
                     <div id="measurementsList"></div>
                 </div>
             </div>
@@ -52,6 +52,17 @@
             <div class="view admin-view">
                 <div class="stats-card">
                     <h2>Statistiken</h2>
+                    <div class="stats-header">
+                        <div class="total-controls">
+                            Gesamtanzahl Kontrollen: <span id="totalControls">0</span>
+                        </div>
+                        <div class="chart-toggle">
+                            <button id="toggleChart" class="toggle-button">
+                                <i class="fas fa-chart-line"></i>
+                                Ansicht wechseln
+                            </button>
+                        </div>
+                    </div>
                     <canvas id="statsChart"></canvas>
                     <div class="stats-summary">
                         <div>Durchschnitt: <span id="avgTime">-</span></div>

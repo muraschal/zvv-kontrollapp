@@ -2,6 +2,7 @@ let timer;
 let isRunning = false;
 let startTime;
 let measurements = [];
+let chartType = 'bar'; // oder 'line'
 
 const timerDisplay = document.querySelector('.timer');
 const startStopBtn = document.getElementById('startStop');
@@ -74,14 +75,14 @@ function toggleTimer() {
         isRunning = true;
         timerDisplay.classList.add('running');
         startStopBtn.classList.add('running');
-        document.querySelector('.breathing-container').classList.add('active-control');
+        document.querySelector('.timer-card').classList.add('active-control');
     } else {
         clearInterval(timer);
         const elapsed = Date.now() - startTime;
         const duration = elapsed / 1000;
         timerDisplay.classList.remove('running');
         startStopBtn.classList.remove('running');
-        document.querySelector('.breathing-container').classList.remove('active-control');
+        document.querySelector('.timer-card').classList.remove('active-control');
         startStopBtn.textContent = 'Start';
         showMediaDialog(duration);
     }
@@ -146,7 +147,7 @@ function updateMeasurementsList() {
 
     // Überprüfen ob Messungen vorhanden sind
     if (measurements.length === 0) {
-        measurementsList.innerHTML = '<div class="no-measurements">Keine Kontrollen vorhanden</div>';
+        measurementsList.innerHTML = '<div class="no-measurements">Keine Kontrollen in den letzten 5 Messungen</div>';
         return;
     }
 
@@ -356,6 +357,7 @@ async function deleteAllMeasurements() {
 // Neue Funktion für Statistik-View
 function updateStatistics() {
     const ctx = document.getElementById('statsChart');
+    document.getElementById('totalControls').textContent = measurements.length;
     
     // Sicherstellen dass Messungen vorhanden sind
     if (!measurements || measurements.length === 0) {
@@ -374,13 +376,15 @@ function updateStatistics() {
     const data = calculateAveragesByMedium();
 
     window.myChart = new Chart(ctx, {
-        type: 'bar',
+        type: chartType,
         data: {
             labels: data.map(d => d.medium),
             datasets: [{
                 label: 'Durchschnittliche Kontrollzeit (Sekunden)',
                 data: data.map(d => d.avg.toFixed(2)),
-                backgroundColor: ['#0479cc', '#34c759', '#ff9500']
+                backgroundColor: ['#0479cc', '#34c759', '#ff9500'],
+                borderColor: chartType === 'line' ? '#0479cc' : undefined,
+                tension: 0.3
             }]
         },
         options: {
@@ -420,4 +424,9 @@ function calculateAveragesByMedium() {
         medium,
         avg: times.reduce((a,b) => a + b, 0) / times.length
     }));
-} 
+}
+
+document.getElementById('toggleChart').addEventListener('click', () => {
+    chartType = chartType === 'bar' ? 'line' : 'bar';
+    updateStatistics();
+}); 

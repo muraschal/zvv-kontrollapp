@@ -522,3 +522,28 @@ button:active {
     padding: 1.5rem;
     padding-bottom: calc(60px + 4rem);
 }
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.total-controls {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--zvv-blue);
+}
+
+.toggle-button {
+    background: var(--zvv-light-blue);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.toggle-button i {
+    margin-right: 0.5rem;
+}
