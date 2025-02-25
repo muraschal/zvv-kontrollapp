@@ -612,9 +612,22 @@ function updateStatistics() {
                         // Nur jeden 5. Tick anzeigen im Liniendiagramm und Farben für Trägermedien im Balkendiagramm
                         callback: function(val, index) {
                             if (chartType === 'line') {
-                                // Zeige nur Werte in 5er-Schritten an (1, 5, 10, 15, 20)
+                                // Dynamische Skalierung basierend auf der Anzahl der Datenpunkte
                                 const numVal = parseInt(this.getLabelForValue(val));
-                                return numVal === 1 || numVal % 5 === 0 ? numVal : '';
+                                const totalPoints = chartData.count;
+                                
+                                // Berechne den Abstand zwischen den Labels basierend auf der Gesamtanzahl
+                                let step = 1;
+                                if (totalPoints <= 10) {
+                                    step = 1; // Bei wenigen Punkten jeden Punkt beschriften
+                                } else if (totalPoints <= 20) {
+                                    step = 2; // Bei mittlerer Anzahl jeden zweiten Punkt
+                                } else {
+                                    step = 5; // Bei vielen Punkten jeden fünften Punkt
+                                }
+                                
+                                // Immer den ersten und letzten Punkt anzeigen, sonst nur gemäß Step
+                                return numVal === 1 || numVal === totalPoints || numVal % step === 0 ? numVal : '';
                             }
                             
                             // Für Balkendiagramm: Beschriftungen immer in Grau anzeigen
@@ -722,8 +735,9 @@ function calculateTimelineData() {
         .sort((a, b) => a.duration - b.duration);
     const median = sortedDurations[Math.floor(sortedDurations.length / 2)].duration;
 
-    // Nehme die letzten 20 Messungen und nummeriere sie einfach durch
-    const recentMeasurements = measurements.slice(-20);
+    // Dynamische Anzahl von Messungen basierend auf der Gesamtanzahl
+    const maxDisplay = Math.min(measurements.length, 30); // Maximal 30 Messungen anzeigen
+    const recentMeasurements = measurements.slice(-maxDisplay);
     
     return {
         data: recentMeasurements.map((m, index) => ({
@@ -731,7 +745,8 @@ function calculateTimelineData() {
             duration: m.duration,
             medium: m.medium // Speichere das Medium für die Farbzuweisung
         })),
-        median: median
+        median: median,
+        count: recentMeasurements.length // Anzahl der angezeigten Messungen
     };
 }
 
