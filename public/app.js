@@ -399,6 +399,12 @@ function updateStatistics() {
         ? calculateAveragesByMedium()
         : calculateTimelineData();
 
+    // Update chart title based on type
+    document.querySelector('.chart-title').textContent = 
+        chartType === 'bar' 
+            ? 'Durchschnittliche Kontrollzeit' 
+            : 'Kontrolldauer';
+
     window.myChart = new Chart(ctx, {
         type: chartType,
         data: {
