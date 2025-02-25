@@ -110,9 +110,9 @@ function updateDisplay() {
     const elapsed = Date.now() - startTime;
     const ms = elapsed % 1000;
     const seconds = Math.floor(elapsed / 1000) % 60;
-    const minutes = Math.floor(elapsed / 60000);
+    const minutes = Math.floor(elapsed / 60000) % 60;
     
-    timerDisplay.textContent = `${pad(minutes)}:${pad(seconds)}.${pad3(ms)}`;
+    timerDisplay.textContent = `${pad(seconds)}.${pad3(ms)}`;
 }
 
 function pad(number) {
@@ -212,7 +212,7 @@ function resetTimer() {
         clearInterval(timer);
         timer = null;
     }
-    timerDisplay.textContent = '00:00.000';
+    timerDisplay.textContent = '00.000';
     timerDisplay.classList.remove('running');
     startStopBtn.classList.remove('running');
     document.querySelector('.full-page-breathing').classList.remove('active-control');
@@ -276,7 +276,7 @@ async function showMediaDialog(duration, result = null) {
                 
                 // Timer zurücksetzen
                 clearInterval(timer);
-                timerDisplay.textContent = '00:00.000';
+                timerDisplay.textContent = '00.000';
                 startStopBtn.textContent = 'Start';
                 isRunning = false;
             };
