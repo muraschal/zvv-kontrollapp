@@ -591,4 +591,4 @@ button:active {
 }
 
 /* ZVV Font-Einbindung */
-@import url('font/stylesheet.css');
+@import url('/font/stylesheet.css');
