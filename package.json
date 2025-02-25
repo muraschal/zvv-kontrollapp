@@ -6,18 +6,18 @@
     "express": "^4.21.2"
   },
   "name": "zvv-kontrollapp",
-  "version": "1.0.1",
-  "description": "- **Frontend:** HTML + JavaScript (React optional)\r - **Datenspeicherung:** Browser-basierte CSV-Generierung\r - **Hosting:** Vercel",
+  "version": "1.3.2",
+  "description": "Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/muraschal/zvv-kontrollapp.git"
   },
-  "keywords": [],
+  "keywords": ["zvv", "pwa", "kontrollapp"],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -26,5 +26,8 @@
   "homepage": "https://github.com/muraschal/zvv-kontrollapp#readme",
   "devDependencies": {
     "nodemon": "^3.1.9"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }
