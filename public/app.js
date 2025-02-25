@@ -66,14 +66,17 @@ function toggleTimer() {
         if (timer) clearInterval(timer);
         startTime = Date.now();
         timer = setInterval(updateDisplay, 10);
-        startStopBtn.textContent = 'Stop';
+        startStopBtn.textContent = 'Stopp';
         isRunning = true;
         timerDisplay.classList.add('running');
+        startStopBtn.classList.add('running');
     } else {
         clearInterval(timer);
         const elapsed = Date.now() - startTime;
         const duration = elapsed / 1000;
         timerDisplay.classList.remove('running');
+        startStopBtn.classList.remove('running');
+        startStopBtn.textContent = 'Start';
         showMediaDialog(duration);
     }
 }
