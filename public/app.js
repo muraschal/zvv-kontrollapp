@@ -205,6 +205,18 @@ function updateMeasurementsList() {
         .join('');
 } 
 
+function resetTimer() {
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+    timerDisplay.textContent = '00:00:00.000';
+    timerDisplay.classList.remove('running');
+    startStopBtn.classList.remove('running');
+    document.querySelector('.timer-card').classList.remove('active-control');
+    isRunning = false;
+}
+
 async function showMediaDialog(duration, result = null) {
     // Entferne alle existierenden Overlays
     document.querySelectorAll('.overlay').forEach(el => el.remove());
@@ -230,9 +242,6 @@ async function showMediaDialog(duration, result = null) {
                 if (medium === 'Abgebrochen') {
                     overlay.remove();
                     resetTimer();
-                    timerDisplay.textContent = '00:00:00.000';
-                    startStopBtn.textContent = 'Start';
-                    isRunning = false;
                 } else {
                     // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
                     showMediaDialog(duration, medium);
@@ -255,9 +264,6 @@ async function showMediaDialog(duration, result = null) {
                 // Speichern, außer bei Abbruch
                 if (kontrollergebnis === 'Abgebrochen') {
                     resetTimer();
-                    timerDisplay.textContent = '00:00:00.000';
-                    startStopBtn.textContent = 'Start';
-                    isRunning = false;
                     return;
                 }
                 
