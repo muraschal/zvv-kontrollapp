@@ -775,7 +775,7 @@ button:active {
 
 /* Buttons in der Admin-View */
 .admin-view button {
-    margin: 10px;
+    margin: 10px 0;
     padding: 12px 20px;
     border-radius: 8px;
     background-color: var(--zvv-blue);
@@ -838,4 +838,29 @@ button:active {
 
 .close-button:hover {
     color: #000;
+}
+
+.admin-card h2 {
+    color: var(--text-black);
+    font-size: 1.5rem;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    margin-bottom: 1rem;
+}
+
+.admin-section {
+    margin-bottom: 2rem;
+}
+
+.admin-section h3 {
+    color: var(--text-black);
+    font-size: 1.2rem;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    margin-bottom: 0.5rem;
+}
+
+.admin-info {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
 }

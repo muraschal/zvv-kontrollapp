@@ -108,9 +108,19 @@
             <div class="view admin-view">
                 <div class="card admin-card">
                     <h2>Administration</h2>
-                    <button id="downloadCSV"><i class="fas fa-file-csv"></i> CSV herunterladen</button>
-                    <button id="downloadXLS"><i class="fas fa-file-excel"></i> Excel herunterladen</button>
-                    <button id="deleteAll" class="delete-button"><i class="fas fa-trash"></i> Alle Kontrollen löschen</button>
+                    
+                    <div class="admin-section">
+                        <h3>Datenexport</h3>
+                        <p class="admin-info">Kontrollauswertung als unformatiertes CSV oder vorformatiertes Excel direkt via API herunterladen:</p>
+                        <button id="downloadCSV"><i class="fas fa-file-csv"></i> CSV herunterladen</button>
+                        <button id="downloadXLS"><i class="fas fa-file-excel"></i> Excel herunterladen</button>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <h3>Datenverwaltung</h3>
+                        <p class="admin-info">Achtung: Dies löscht alle Einträge auf Redis. Passwort wird benötigt:</p>
+                        <button id="deleteAll" class="delete-button"><i class="fas fa-trash"></i> Alle Kontrollen löschen</button>
+                    </div>
                 </div>
             </div>
 
