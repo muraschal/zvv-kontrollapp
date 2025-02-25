@@ -595,9 +595,10 @@ button:active {
 
 .metric-label {
     color: var(--text-black);
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 .metric-value {
@@ -629,8 +630,14 @@ button:active {
     margin-bottom: 0.5rem;
 }
 
-.stats-summary div {
-    color: var(--text-black);
+.stats-summary div::after,
+.metric-label::after {
+    content: none;
+}
+
+.stats-summary,
+.stats-metrics {
+    text-align: center;
 }
 
 .stats-summary span {
