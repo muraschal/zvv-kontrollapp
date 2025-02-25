@@ -74,12 +74,14 @@ function toggleTimer() {
         isRunning = true;
         timerDisplay.classList.add('running');
         startStopBtn.classList.add('running');
+        document.querySelector('.container').classList.add('active-control');
     } else {
         clearInterval(timer);
         const elapsed = Date.now() - startTime;
         const duration = elapsed / 1000;
         timerDisplay.classList.remove('running');
         startStopBtn.classList.remove('running');
+        document.querySelector('.container').classList.remove('active-control');
         startStopBtn.textContent = 'Start';
         showMediaDialog(duration);
     }
