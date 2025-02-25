@@ -12,11 +12,10 @@
 }
 
 :root {
-    --zvv-blue: #003082;        /* ZVV Hauptblau */
+    --zvv-blue: #0479cc;        /* ZVV Hauptblau */
     --zvv-red: #e2000f;         /* ZVV Rot */
     --zvv-pink: #e5007d;        /* ZVV Rosa */
     --zvv-green: #239c36;       /* ZVV Grün */
-    --zvv-light-blue: #0479cc;  /* ZVV Hellblau */
     --zvv-white: #ffffff;
     --zvv-gray: #f5f5f7;
     --text-gray: #636363;
@@ -51,7 +50,7 @@ body::before {
     background-image: url('gfx/zvv-bg.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.20;
+    opacity: 0.75;
     z-index: -2;
     pointer-events: none;
     mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
@@ -65,7 +64,7 @@ body::before {
 }
 
 .header {
-    background-color: var(--zvv-light-blue);
+    background-color: var(--zvv-blue);
     color: var(--zvv-white);
     padding: 0.875rem 1.25rem;
     position: sticky;
@@ -111,7 +110,7 @@ body::before {
 .timer.running {
     background: linear-gradient(
         45deg,
-        var(--zvv-light-blue),
+        var(--zvv-blue),
         var(--zvv-green),
         var(--zvv-pink)
     );
@@ -153,7 +152,7 @@ button:active {
 }
 
 #downloadCSV {
-    background-color: var(--zvv-light-blue);
+    background-color: var(--zvv-blue);
     color: var(--zvv-white);
     width: 100%;
     margin-top: 1rem;
@@ -243,7 +242,7 @@ button:active {
 .media-button {
     padding: 1.2rem;
     font-size: 1.1rem;
-    background-color: var(--zvv-light-blue);
+    background-color: var(--zvv-blue);
     color: var(--zvv-white);
     border: none;
     border-radius: 12px;
@@ -509,7 +508,7 @@ button:active {
 
 @keyframes breathe {
     0% {
-        box-shadow: 0 0 30px 0px var(--zvv-light-blue);
+        box-shadow: 0 0 30px 0px var(--zvv-blue);
         border: 3px solid rgba(4, 121, 204, 0.8);
         filter: brightness(1) drop-shadow(0 0 25px rgba(4, 121, 204, 0.4));
     }
@@ -568,7 +567,7 @@ button:active {
 }
 
 .toggle-button {
-    background: var(--zvv-light-blue);
+    background: var(--zvv-blue);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 8px;
