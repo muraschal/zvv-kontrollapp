@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zvv-kontrollapp-v1';
+const CACHE_NAME = 'zvv-kontrollapp-v1.3.4';
 const urlsToCache = [
   '/',
   '/index.html',

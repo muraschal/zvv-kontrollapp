@@ -341,7 +341,7 @@ button:active {
 }
 
 .changelog-section {
-    margin-top: 2rem;
+    /* margin-top entfernt */
 }
 
 .changelog-section h3 {
