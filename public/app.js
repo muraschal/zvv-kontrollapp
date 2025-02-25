@@ -326,6 +326,7 @@ async function saveMeasurement(duration, medium, result) {
     };
     
     try {
+        // Versuche zuerst, die Messung auf dem Server zu speichern
         const response = await fetch('/api/measurements', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -344,24 +345,68 @@ async function saveMeasurement(duration, medium, result) {
         
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
-        alert('Fehler beim Speichern der Messung. Bitte überprüfen Sie Ihre Internetverbindung.');
+        
+        // Fallback: Lokale Speicherung, wenn Server nicht erreichbar
+        console.log('Verwende lokale Speicherung als Fallback');
+        measurements.push(measurement);
+        updateMeasurementsList();
+        
+        // Speichere im localStorage
+        try {
+            localStorage.setItem('measurements', JSON.stringify(measurements));
+        } catch (localError) {
+            console.error('Fehler beim lokalen Speichern:', localError);
+        }
     }
 }
 
 async function loadMeasurements() {
     try {
+        // Versuche zuerst, Messungen vom Server zu laden
         const response = await fetch('/api/measurements');
         if (!response.ok) throw new Error('Network response was not ok');
         measurements = await response.json() || [];
         updateMeasurementsList();
     } catch (error) {
         console.error('Error loading measurements:', error);
-        measurements = [];
+        
+        // Fallback: Lade aus localStorage, wenn Server nicht erreichbar
+        console.log('Verwende lokale Daten als Fallback');
+        try {
+            const localData = localStorage.getItem('measurements');
+            if (localData) {
+                measurements = JSON.parse(localData) || [];
+            } else {
+                measurements = [];
+            }
+            updateMeasurementsList();
+        } catch (localError) {
+            console.error('Fehler beim Laden lokaler Daten:', localError);
+            measurements = [];
+        }
     }
 }
 
 // Ersetze die existierende localStorage-Ladeoperation mit:
 loadMeasurements(); 
+
+// Initialisiere die App mit lokalen Daten, falls vorhanden
+(function initializeApp() {
+    // Versuche, lokale Daten zu laden, falls vorhanden
+    try {
+        const localData = localStorage.getItem('measurements');
+        if (localData) {
+            console.log('Lokale Daten gefunden, initialisiere App');
+            measurements = JSON.parse(localData) || [];
+            updateMeasurementsList();
+        }
+    } catch (error) {
+        console.error('Fehler beim Initialisieren mit lokalen Daten:', error);
+    }
+    
+    // Dann versuche, vom Server zu laden (wird die lokalen Daten überschreiben, falls erfolgreich)
+    loadMeasurements();
+})();
 
 async function deleteAllMeasurements() {
     const password = prompt('Bitte geben Sie das Passwort ein:');
@@ -377,6 +422,7 @@ async function deleteAllMeasurements() {
     
     if (confirm('Möchten Sie wirklich alle Kontrollen löschen?')) {
         try {
+            // Versuche zuerst, Messungen auf dem Server zu löschen
             const response = await fetch('/api/measurements', {
                 method: 'DELETE',
                 headers: {
@@ -395,13 +441,22 @@ async function deleteAllMeasurements() {
                 throw new Error('Netzwerkfehler');
             }
             
+            // Lösche auch lokale Daten
             measurements = [];
+            localStorage.removeItem('measurements');
             updateMeasurementsList();
             alert('Alle Messungen wurden erfolgreich gelöscht');
             
         } catch (error) {
             console.error('Fehler beim Löschen:', error);
-            alert('Fehler beim Löschen der Daten');
+            
+            // Fallback: Lösche nur lokale Daten
+            if (confirm('Server nicht erreichbar. Möchten Sie nur die lokalen Daten löschen?')) {
+                measurements = [];
+                localStorage.removeItem('measurements');
+                updateMeasurementsList();
+                alert('Lokale Messungen wurden gelöscht');
+            }
         }
     }
 } 
