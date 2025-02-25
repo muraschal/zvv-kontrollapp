@@ -20,6 +20,11 @@
     --zvv-gray: #f5f5f7;
     --text-gray: #636363;
     --text-black: #000000;
+    
+    /* Trägermedien Farben */
+    --swisspass-color: #c51416;  /* Dunkelrot für SwissPass */
+    --eticket-color: #8a2be2;    /* Violett für E-Ticket */
+    --eticket-id-color: #ff69b4; /* Pink für E-Ticket mit Ausweisprüfung */
 }
 
 * {
@@ -248,6 +253,19 @@ button:active {
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s ease;
+}
+
+/* Spezifische Stile für Trägermedium-Buttons */
+.media-button[data-medium="SwissPass"] {
+    background-color: var(--swisspass-color);
+}
+
+.media-button[data-medium="E-Ticket"] {
+    background-color: var(--eticket-color);
+}
+
+.media-button[data-medium="E-Ticket mit Ausweisprüfung"] {
+    background-color: var(--eticket-id-color);
 }
 
 .media-button:active {

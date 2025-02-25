@@ -230,11 +230,21 @@ function createMeasurementHTML(measurement) {
                      'times-circle';
     const resultClass = result === 'Abgebrochen' ? 'cancelled' : result;
     
+    // Bestimme die Farbe für das Trägermedium
+    let mediumColor = 'inherit';
+    if (measurement.medium === 'SwissPass') {
+        mediumColor = 'var(--swisspass-color)';
+    } else if (measurement.medium === 'E-Ticket') {
+        mediumColor = 'var(--eticket-color)';
+    } else if (measurement.medium === 'E-Ticket mit Ausweisprüfung') {
+        mediumColor = 'var(--eticket-id-color)';
+    }
+    
     return `
         <div class="measurement-item ${resultClass}">
             <div>Datum: ${formattedDate}</div>
             <div>Dauer: ${formattedDuration}</div>
-            <div>Medium: ${measurement.medium}</div>
+            <div>Medium: <span style="color: ${mediumColor}; font-weight: bold;">${measurement.medium}</span></div>
             <div class="result ${resultClass}">
                 <i class="fas fa-${resultIcon}"></i>
                 Ergebnis: ${result}
@@ -516,7 +526,14 @@ function updateStatistics() {
                     data: chartType === 'bar'
                         ? chartData.map(d => d.avg.toFixed(2))
                         : chartData.data.map(d => d.duration),
-                    backgroundColor: chartType === 'bar' ? ['#0479cc', '#34c759', '#ff9500'] : '#0479cc',
+                    backgroundColor: chartType === 'bar' 
+                        ? chartData.map(d => {
+                            if (d.medium === 'SwissPass') return 'var(--swisspass-color)';
+                            if (d.medium === 'E-Ticket') return 'var(--eticket-color)';
+                            if (d.medium === 'E-Ticket mit Ausweisprüfung') return 'var(--eticket-id-color)';
+                            return '#0479cc'; // Fallback
+                        })
+                        : '#0479cc',
                     borderColor: chartType === 'line' ? '#0479cc' : undefined,
                     tension: 0.3
                 }
