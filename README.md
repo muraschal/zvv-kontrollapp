@@ -9,6 +9,37 @@ Eine Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV.
 - 📊 CSV-Export der Messungen
 - 🔄 Echtzeit-Synchronisation
 
+## Technische Details
+
+### API Endpoints
+```
+GET    /api/measurements       # Alle Messungen abrufen
+POST   /api/measurements      # Neue Messung speichern
+DELETE /api/measurements      # Alle Messungen löschen (Auth required)
+GET    /api/measurements/download  # CSV-Export aller Messungen
+```
+
+### Datenstruktur
+```json
+{
+  "timestamp": "2024-02-25T13:14:00.000Z",
+  "duration": 0.617,
+  "medium": "SwissPass",
+  "result": "grün"
+}
+```
+
+### Technologie-Stack
+- **Frontend:** Vanilla JavaScript, HTML5, CSS3
+- **Backend:** Node.js, Express
+- **Datenbank:** Upstash Redis
+- **Hosting:** Vercel
+- **Features:**
+  - Service Worker für Offline-Funktionalität
+  - Auto-Sync bei Netzwerk-Wiederherstellung
+  - Real-time Updates zwischen Geräten
+  - Excel-kompatible CSV-Exports
+
 ## Setup
 
 ### Voraussetzungen
