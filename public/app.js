@@ -217,6 +217,9 @@ async function showMediaDialog(duration, result = null) {
                 if (medium === 'Abgebrochen') {
                     overlay.remove();
                     resetTimer();
+                    timerDisplay.textContent = '00:00:00.000';
+                    startStopBtn.textContent = 'Start';
+                    isRunning = false;
                 } else {
                     // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
                     showMediaDialog(duration, medium);
@@ -239,6 +242,9 @@ async function showMediaDialog(duration, result = null) {
                 // Speichern, außer bei Abbruch
                 if (kontrollergebnis === 'Abgebrochen') {
                     resetTimer();
+                    timerDisplay.textContent = '00:00:00.000';
+                    startStopBtn.textContent = 'Start';
+                    isRunning = false;
                     return;
                 }
                 
@@ -249,9 +255,7 @@ async function showMediaDialog(duration, result = null) {
                 clearInterval(timer);
                 timerDisplay.textContent = '00:00:00.000';
                 startStopBtn.textContent = 'Start';
-                startStopBtn.classList.remove('running');
                 isRunning = false;
-                timerDisplay.classList.remove('running');
             };
         });
     }
@@ -359,36 +363,46 @@ function updateStatistics() {
     const ctx = document.getElementById('statsChart');
     document.getElementById('totalControls').textContent = measurements.length;
     
-    // Sicherstellen dass Messungen vorhanden sind
-    if (!measurements || measurements.length === 0) {
-        document.getElementById('avgTime').textContent = '-';
-        document.getElementById('minTime').textContent = '-';
-        document.getElementById('maxTime').textContent = '-';
-        return;
-    }
-
-    // Existierendes Chart zerstören falls vorhanden
-    if (window.myChart && typeof window.myChart.destroy === 'function') {
-        window.myChart.destroy();
-    }
-
-    // Daten vorbereiten
-    const data = calculateAveragesByMedium();
+    const chartData = chartType === 'bar' 
+        ? calculateAveragesByMedium()
+        : calculateTimelineData();
 
     window.myChart = new Chart(ctx, {
         type: chartType,
         data: {
-            labels: data.map(d => d.medium),
+            labels: chartType === 'bar' 
+                ? chartData.map(d => d.medium)
+                : chartData.map(d => d.time),
             datasets: [{
-                label: 'Durchschnittliche Kontrollzeit (Sekunden)',
-                data: data.map(d => d.avg.toFixed(2)),
-                backgroundColor: ['#0479cc', '#34c759', '#ff9500'],
+                label: chartType === 'bar' 
+                    ? 'Durchschnittliche Kontrollzeit (Sekunden)'
+                    : 'Kontrolldauer im Zeitverlauf',
+                data: chartType === 'bar'
+                    ? chartData.map(d => d.avg.toFixed(2))
+                    : chartData.map(d => d.duration),
+                backgroundColor: chartType === 'bar' ? ['#0479cc', '#34c759', '#ff9500'] : '#0479cc',
                 borderColor: chartType === 'line' ? '#0479cc' : undefined,
                 tension: 0.3
             }]
         },
         options: {
             responsive: true,
+            scales: {
+                x: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: chartType === 'bar' ? 'Trägermedium' : 'Zeit'
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                        display: true,
+                        text: 'Sekunden'
+                    }
+                }
+            },
             plugins: {
                 legend: {
                     display: false
@@ -424,6 +438,18 @@ function calculateAveragesByMedium() {
         medium,
         avg: times.reduce((a,b) => a + b, 0) / times.length
     }));
+}
+
+function calculateTimelineData() {
+    return measurements
+        .slice(-20)  // Letzte 20 Messungen
+        .map(m => ({
+            time: new Date(m.timestamp).toLocaleTimeString('de-CH', {
+                hour: '2-digit',
+                minute: '2-digit'
+            }),
+            duration: m.duration
+        }));
 }
 
 document.getElementById('toggleChart').addEventListener('click', () => {
