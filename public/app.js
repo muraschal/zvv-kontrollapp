@@ -111,7 +111,10 @@ function downloadCSV() {
                 timeZone: 'Europe/Zurich'
             }).replace(/,/g, '');
             
-            return `"${formattedDate}",${row.duration},${row.medium},${row.result}`;
+            // Gleiche Fallback-Logik wie in der Anzeige
+            const result = (row.result === undefined || row.result === null) ? 'Abgebrochen' : row.result;
+            
+            return `"${formattedDate}",${row.duration},${row.medium},${result}`;
         }).join("\n");
 
     const encodedUri = encodeURI(csvContent);
@@ -167,8 +170,8 @@ function updateMeasurementsList() {
             const milliseconds = Math.floor((m.duration % 1) * 1000);
             const formattedDuration = `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
             
-            // Fallback für fehlende Ergebnisse
-            const result = m.result || 'Abgebrochen';
+            // Nur Fallback wenn result wirklich undefined oder null ist
+            const result = (m.result === undefined || m.result === null) ? 'Abgebrochen' : m.result;
             const resultIcon = result === 'grün' ? 'check-circle' : 
                              result === 'orange' ? 'exclamation-circle' : 
                              'times-circle';
