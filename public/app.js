@@ -88,7 +88,7 @@ function toggleTimer() {
         isRunning = true;
         timerDisplay.classList.add('running');
         startStopBtn.classList.add('running');
-        document.querySelector('.timer-card').classList.add('active-control');
+        document.querySelector('.full-page-breathing').classList.add('active-control');
         const animation = document.querySelector('.background-animation');
         if (animation) animation.classList.add('active');
     } else {
@@ -97,7 +97,7 @@ function toggleTimer() {
         const duration = elapsed / 1000;
         timerDisplay.classList.remove('running');
         startStopBtn.classList.remove('running');
-        document.querySelector('.timer-card').classList.remove('active-control');
+        document.querySelector('.full-page-breathing').classList.remove('active-control');
         const animation = document.querySelector('.background-animation');
         if (animation) animation.classList.remove('active');
         startStopBtn.textContent = 'Start';
@@ -215,7 +215,7 @@ function resetTimer() {
     timerDisplay.textContent = '00:00.000';
     timerDisplay.classList.remove('running');
     startStopBtn.classList.remove('running');
-    document.querySelector('.timer-card').classList.remove('active-control');
+    document.querySelector('.full-page-breathing').classList.remove('active-control');
     const animation = document.querySelector('.background-animation');
     if (animation) animation.classList.remove('active');
     isRunning = false;

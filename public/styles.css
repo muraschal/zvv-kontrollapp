@@ -676,3 +676,36 @@ button:active {
 .background-animation.active {
     visibility: visible;
 }
+
+.full-page-breathing {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.full-page-breathing.active-control {
+    animation: breathe 5s infinite ease-in-out;
+    -webkit-animation: breathe 5s infinite ease-in-out;
+    background: linear-gradient(
+        45deg,
+        rgba(4, 121, 204, 0.15),
+        rgba(35, 156, 54, 0.15),
+        rgba(229, 0, 125, 0.15)
+    );
+    will-change: transform, box-shadow, filter;
+}
+
+@keyframes breathe {
+    0% {
+        box-shadow: 0 0 30px 0px var(--zvv-light-blue);
+        filter: brightness(1) drop-shadow(0 0 25px rgba(4, 121, 204, 0.4));
+    }
+    50% {
+        box-shadow: 0 0 50px 15px var(--zvv-green);
+        filter: brightness(1.05) drop-shadow(0 0 35px rgba(35, 156, 54, 0.5));
+    }
+    100% {
+        box-shadow: 0 0 30px 0px var(--zvv-pink);
+        filter: brightness(1) drop-shadow(0 0 25px rgba(229, 0, 125, 0.4));
+    }
+}
