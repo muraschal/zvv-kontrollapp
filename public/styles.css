@@ -77,7 +77,7 @@ body::before {
     z-index: 100;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 0.75rem;
 }
 
@@ -85,6 +85,13 @@ body::before {
     height: 2.25rem;  /* 20% größer: 1.875 * 1.2 = 2.25 */
     width: auto;
     filter: brightness(0) invert(1);  /* Macht das Logo weiß */
+}
+
+.app-version {
+    font-family: "ZVV Brown Narrow S Web Bold", sans-serif;
+    font-size: 1.125rem;
+    color: var(--zvv-white);
+    text-align: right;
 }
 
 .header h1 {

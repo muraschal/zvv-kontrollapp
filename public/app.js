@@ -571,6 +571,10 @@ function updateStatistics() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            color: '#000000', // Globale Textfarbe für das gesamte Chart
+            font: {
+                color: '#000000' // Globale Schriftfarbe
+            },
             layout: {
                 padding: {
                     left: 10,
@@ -582,6 +586,9 @@ function updateStatistics() {
             plugins: {
                 legend: {
                     display: false
+                },
+                title: {
+                    color: '#000000' // Globale Titelfarbe für alle Titel
                 }
             },
             scales: {
@@ -601,6 +608,7 @@ function updateStatistics() {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
                         },
+                        color: '#000000', // Farbe für alle X-Achsenbeschriftungen
                         // Nur jeden 5. Tick anzeigen im Liniendiagramm und Farben für Trägermedien im Balkendiagramm
                         callback: function(val, index) {
                             if (chartType === 'line') {
@@ -609,20 +617,9 @@ function updateStatistics() {
                                 return numVal === 1 || numVal % 5 === 0 ? numVal : '';
                             }
                             
-                            // Für Balkendiagramm: Farben für die Trägermedien setzen
-                            const label = this.getLabelForValue(val);
-                            if (chartType === 'bar') {
-                                if (label === 'SwissPass') {
-                                    this.color = '#c51416'; // SwissPass Rot
-                                } else if (label === 'E-Ticket') {
-                                    this.color = '#8a2be2'; // E-Ticket Violett
-                                } else if (label === 'E-Ticket mit Ausweisprüfung') {
-                                    this.color = '#ff69b4'; // E-Ticket mit Ausweis Pink
-                                } else {
-                                    this.color = '#000000'; // Schwarz als Fallback
-                                }
-                            }
-                            return label;
+                            // Für Balkendiagramm: Beschriftungen immer in Schwarz anzeigen
+                            this.color = '#000000'; // Immer schwarz
+                            return this.getLabelForValue(val);
                         }
                     },
                     title: {
@@ -630,9 +627,11 @@ function updateStatistics() {
                         text: chartType === 'bar' ? 'Trägermedium' : 'Kontrollvorgang',
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
-                            size: 14
+                            size: 14,
+                            color: '#000000' // Farbe direkt im font-Objekt setzen
                         },
-                        align: 'start'
+                        align: 'start',
+                        color: '#000000' // Titel der X-Achse in Schwarz
                     }
                 },
                 y: {
@@ -649,16 +648,19 @@ function updateStatistics() {
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
-                        }
+                        },
+                        color: '#000000' // Y-Achsenbeschriftungen immer in Schwarz
                     },
                     title: {
                         display: true,
                         text: 'Sekunden',
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
-                            size: 14
+                            size: 14,
+                            color: '#000000' // Farbe direkt im font-Objekt setzen
                         },
-                        align: 'start'
+                        align: 'start',
+                        color: '#000000' // Titel der Y-Achse in Schwarz
                     }
                 }
             }
