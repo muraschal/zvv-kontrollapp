@@ -62,6 +62,19 @@ function showView(view) {
         // Update stats when switching to admin view
         if (view === 'admin') {
             updateStatistics();
+            // Re-attach event listener for chart toggle
+            const toggleBtn = document.getElementById('toggleChart');
+            if (toggleBtn) {
+                toggleBtn.onclick = () => {
+                    chartType = chartType === 'bar' ? 'line' : 'bar';
+                    // Update button icon
+                    const icon = toggleBtn.querySelector('i');
+                    icon.className = chartType === 'bar' 
+                        ? 'fas fa-chart-line' 
+                        : 'fas fa-chart-bar';
+                    updateStatistics();
+                };
+            }
         }
     }
 }
@@ -450,9 +463,4 @@ function calculateTimelineData() {
             }),
             duration: m.duration
         }));
-}
-
-document.getElementById('toggleChart').addEventListener('click', () => {
-    chartType = chartType === 'bar' ? 'line' : 'bar';
-    updateStatistics();
-}); 
+} 
