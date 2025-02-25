@@ -63,10 +63,9 @@ body::before {
 }
 
 .zvv-logo {
-    height: 1.875rem;
+    height: 2.25rem;  /* 20% größer: 1.875 * 1.2 = 2.25 */
     width: auto;
     filter: brightness(0) invert(1);  /* Macht das Logo weiß */
-    margin-top: -1px;
 }
 
 .header h1 {
