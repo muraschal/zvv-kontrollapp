@@ -351,23 +351,50 @@ async function deleteAllMeasurements() {
     }
 } 
 
-// Chart.js einbinden
-import Chart from 'chart.js/auto';
-
 // Neue Funktion für Statistik-View
 function updateStatistics() {
     const ctx = document.getElementById('statsChart');
-    new Chart(ctx, {
+    // Existierendes Chart zerstören falls vorhanden
+    if (window.statsChart) {
+        window.statsChart.destroy();
+    }
+
+    // Daten vorbereiten
+    const data = calculateAveragesByMedium();
+
+    window.statsChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: measurements.map(m => m.medium),
+            labels: data.map(d => d.medium),
             datasets: [{
                 label: 'Durchschnittliche Kontrollzeit (Sekunden)',
-                data: calculateAveragesByMedium(),
+                data: data.map(d => d.avg.toFixed(2)),
                 backgroundColor: ['#0479cc', '#34c759', '#ff9500']
             }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
         }
     });
+
+    // Update summary stats
+    updateSummaryStats();
+}
+
+function updateSummaryStats() {
+    const allDurations = measurements.map(m => m.duration);
+    const avg = allDurations.reduce((a,b) => a + b, 0) / allDurations.length;
+    const min = Math.min(...allDurations);
+    const max = Math.max(...allDurations);
+
+    document.getElementById('avgTime').textContent = avg.toFixed(2) + 's';
+    document.getElementById('minTime').textContent = min.toFixed(2) + 's';
+    document.getElementById('maxTime').textContent = max.toFixed(2) + 's';
 }
 
 // Durchschnittszeiten berechnen
