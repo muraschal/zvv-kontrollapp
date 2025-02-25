@@ -312,14 +312,15 @@ button:active {
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+    color: var(--text-black);
 }
 
 .version-badge {
-    display: inline-block;
-    background-color: var(--zvv-light-blue);
-    color: white;
+    color: var(--text-black);
+    background: none;
     padding: 0.3rem 0.8rem;
-    border-radius: 20px;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    font-size: 1.5rem;
 }
 
 .copyright {
