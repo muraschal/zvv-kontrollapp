@@ -8,7 +8,7 @@
   },
   "name": "zvv-kontrollapp",
   "version": "1.3.5",
-  "description": "Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV",
+  "description": "Progressive Web App (PWA) zur Erfassung von Kontrolldauer für den ZVV",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",

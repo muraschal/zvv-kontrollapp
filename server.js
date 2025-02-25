@@ -109,7 +109,7 @@ app.get('/api/measurements/download', async (req, res) => {
         console.log('Generated CSV rows:', csvRows);
         // CSV Response
         res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-        res.setHeader('Content-Disposition', `attachment; filename=kontrollzeiten_${new Date().toISOString().split('T')[0]}.csv`);
+        res.setHeader('Content-Disposition', `attachment; filename=kontrolldauer_${new Date().toISOString().split('T')[0]}.csv`);
         res.send('\uFEFF' + csvRows.join('\n')); // BOM für Excel
 
     } catch (error) {
@@ -128,7 +128,7 @@ app.get('/api/measurements/download/excel', async (req, res) => {
         // Excel.js für die Excel-Generierung verwenden
         const ExcelJS = require('exceljs');
         const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet('Kontrollzeiten');
+        const worksheet = workbook.addWorksheet('Kontrolldauer');
         
         // Spalten definieren
         worksheet.columns = [
@@ -187,7 +187,7 @@ app.get('/api/measurements/download/excel', async (req, res) => {
         
         // Als Download senden
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        res.setHeader('Content-Disposition', `attachment; filename=kontrollzeiten_${new Date().toISOString().split('T')[0]}.xlsx`);
+        res.setHeader('Content-Disposition', `attachment; filename=kontrolldauer_${new Date().toISOString().split('T')[0]}.xlsx`);
         res.send(buffer);
         
     } catch (error) {

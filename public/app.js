@@ -524,7 +524,7 @@ function updateStatistics() {
     // Update chart title based on type
     document.querySelector('.chart-title').textContent = 
         chartType === 'bar' 
-            ? 'Durchschnittliche Kontrollzeit' 
+            ? 'Durchschnittliche Kontrolldauer' 
             : 'Kontrolldauer';
 
     window.myChart = new Chart(ctx, {
