@@ -1,3 +1,16 @@
+/* ZVV Font-Einbindung */
+@font-face {
+    font-family: "ZVV Brown Narrow S Web Regular";
+    src: url("/font/ZVVBrownNarrowSWeb-Regular.woff2") format("woff2"),
+         url("/font/ZVVBrownNarrowSWeb-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: "ZVV Brown Narrow S Web Bold";
+    src: url("/font/ZVVBrownNarrowSWeb-Bold.woff2") format("woff2"),
+         url("/font/ZVVBrownNarrowSWeb-Bold.woff") format("woff");
+}
+
 :root {
     --zvv-blue: #003082;        /* ZVV Hauptblau */
     --zvv-red: #e2000f;         /* ZVV Rot */
@@ -589,6 +602,3 @@ button:active {
     background-color: var(--zvv-red);
     color: white;
 }
-
-/* ZVV Font-Einbindung */
-@import url('/font/stylesheet.css');
