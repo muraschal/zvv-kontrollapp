@@ -2,6 +2,9 @@
 
 Eine Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV.
 
+## Zugriff
+Die App ist unter [kontrolle.zvv.ch](https://kontrolle.zvv.ch) erreichbar.
+
 ## Features
 - ⏱️ Präzise Zeitmessung
 - 📱 PWA mit Offline-Support
