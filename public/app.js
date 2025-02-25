@@ -329,18 +329,13 @@ async function saveMeasurement(duration, medium, result) {
 async function loadMeasurements() {
     try {
         const response = await fetch('/api/measurements');
-        if (!response.ok) throw new Error('Netzwerkfehler');
-        
-        measurements = await response.json();
-        console.log('Loaded measurements from Redis:', measurements);
-        
+        if (!response.ok) throw new Error('Network response was not ok');
+        measurements = await response.json() || [];
+        updateMeasurementsList();
     } catch (error) {
-        console.error('Fehler beim Laden:', error);
+        console.error('Error loading measurements:', error);
         measurements = [];
-        alert('Fehler beim Laden der Messungen. Bitte überprüfen Sie Ihre Internetverbindung.');
     }
-    
-    updateMeasurementsList();
 }
 
 // Ersetze die existierende localStorage-Ladeoperation mit:
@@ -574,10 +569,7 @@ window.addEventListener('DOMContentLoaded', () => {
         path: '/gfx/zvv-animation-01.json',
         rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice',
-            className: 'background-animation',
-            initialSegment: [0, 100],
-            scaleMode: 'noScale',
-            viewBoxSize: 133.33 // 100/0.75 für 75% Größe
+            className: 'background-animation'
         }
     });
 }); 
