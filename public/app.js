@@ -206,13 +206,12 @@ async function showMediaDialog(duration, result = null) {
                 const medium = button.dataset.medium;
                 mediaDialog.classList.add('hidden');
                 
-                if (medium !== 'Abgebrochen') {
-                    // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
-                    showMediaDialog(duration, medium);
-                }
                 if (medium === 'Abgebrochen') {
                     overlay.remove();
                     resetTimer();
+                } else {
+                    // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
+                    showMediaDialog(duration, medium);
                 }
             };
         });
@@ -228,10 +227,14 @@ async function showMediaDialog(duration, result = null) {
                 resultDialog.classList.add('hidden');
                 overlay.remove();
                 
-                if (kontrollergebnis !== 'Abgebrochen') {
-                    await saveMeasurement(duration, result, kontrollergebnis);
-                    updateMeasurementsList();
+                // Speichern, außer bei Abbruch
+                if (kontrollergebnis === 'Abgebrochen') {
+                    resetTimer();
+                    return;
                 }
+                
+                await saveMeasurement(duration, result, kontrollergebnis);
+                updateMeasurementsList();
                 resetTimer();
             };
         });
