@@ -571,9 +571,9 @@ function updateStatistics() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            color: '#000000', // Globale Textfarbe für das gesamte Chart
+            color: '#636363', // Globale Textfarbe für das gesamte Chart auf Grau ändern
             font: {
-                color: '#000000' // Globale Schriftfarbe
+                color: '#636363' // Globale Schriftfarbe auf Grau ändern
             },
             layout: {
                 padding: {
@@ -588,7 +588,7 @@ function updateStatistics() {
                     display: false
                 },
                 title: {
-                    color: '#000000' // Globale Titelfarbe für alle Titel
+                    color: '#636363' // Globale Titelfarbe für alle Titel auf Grau ändern
                 }
             },
             scales: {
@@ -608,7 +608,7 @@ function updateStatistics() {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
                         },
-                        color: '#000000', // Farbe für alle X-Achsenbeschriftungen
+                        color: '#636363', // Farbe für alle X-Achsenbeschriftungen auf Grau ändern
                         // Nur jeden 5. Tick anzeigen im Liniendiagramm und Farben für Trägermedien im Balkendiagramm
                         callback: function(val, index) {
                             if (chartType === 'line') {
@@ -617,8 +617,8 @@ function updateStatistics() {
                                 return numVal === 1 || numVal % 5 === 0 ? numVal : '';
                             }
                             
-                            // Für Balkendiagramm: Beschriftungen immer in Schwarz anzeigen
-                            this.color = '#000000'; // Immer schwarz
+                            // Für Balkendiagramm: Beschriftungen immer in Grau anzeigen
+                            this.color = '#636363'; // Immer grau
                             return this.getLabelForValue(val);
                         }
                     },
@@ -628,10 +628,10 @@ function updateStatistics() {
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14,
-                            color: '#000000' // Farbe direkt im font-Objekt setzen
+                            color: '#636363' // Farbe direkt im font-Objekt auf Grau setzen
                         },
                         align: 'start',
-                        color: '#000000' // Titel der X-Achse in Schwarz
+                        color: '#636363' // Titel der X-Achse in Grau
                     }
                 },
                 y: {
@@ -649,7 +649,7 @@ function updateStatistics() {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14
                         },
-                        color: '#000000' // Y-Achsenbeschriftungen immer in Schwarz
+                        color: '#636363' // Y-Achsenbeschriftungen immer in Grau
                     },
                     title: {
                         display: true,
@@ -657,10 +657,10 @@ function updateStatistics() {
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
                             size: 14,
-                            color: '#000000' // Farbe direkt im font-Objekt setzen
+                            color: '#636363' // Farbe direkt im font-Objekt auf Grau setzen
                         },
                         align: 'start',
-                        color: '#000000' // Titel der Y-Achse in Schwarz
+                        color: '#636363' // Titel der Y-Achse in Grau
                     }
                 }
             }
@@ -701,8 +701,14 @@ function updateSummaryStats() {
 function calculateAveragesByMedium() {
     const groups = {};
     measurements.forEach(m => {
-        if (!groups[m.medium]) groups[m.medium] = [];
-        groups[m.medium].push(m.duration);
+        // Für "E-Ticket mit Ausweisprüfung" einen Zeilenumbruch einfügen
+        let medium = m.medium;
+        if (medium === 'E-Ticket mit Ausweisprüfung') {
+            medium = 'E-Ticket mit\nAusweisprüfung';
+        }
+        
+        if (!groups[medium]) groups[medium] = [];
+        groups[medium].push(m.duration);
     });
     
     return Object.entries(groups).map(([medium, times]) => ({
