@@ -3,13 +3,6 @@ let isRunning = false;
 let startTime;
 let measurements = [];
 
-// Lade gespeicherte Messungen
-const savedMeasurements = localStorage.getItem('measurements');
-if (savedMeasurements) {
-    measurements = JSON.parse(savedMeasurements);
-    updateMeasurementsList();
-}
-
 const timerDisplay = document.querySelector('.timer');
 const startStopBtn = document.getElementById('startStop');
 const resetBtn = document.getElementById('reset');
@@ -257,42 +250,6 @@ async function showMediaDialog(duration, result = null) {
     }
 } 
 
-// Neue Funktion für Offline-Speicherung
-function saveToLocalStorage(measurement) {
-    const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
-    measurement.synced = false;
-    offlineMeasurements.push(measurement);
-    localStorage.setItem('offlineMeasurements', JSON.stringify(offlineMeasurements));
-}
-
-// Neue Funktion für Synchronisation
-async function syncOfflineMeasurements() {
-    const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
-    
-    if (offlineMeasurements.length === 0) return;
-    
-    for (const measurement of offlineMeasurements) {
-        try {
-            const response = await fetch('/api/measurements', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(measurement)
-            });
-            
-            if (response.ok) {
-                // Entferne erfolgreich synchronisierte Messung
-                const index = offlineMeasurements.indexOf(measurement);
-                offlineMeasurements.splice(index, 1);
-            }
-        } catch (error) {
-            console.error('Sync error:', error);
-        }
-    }
-    
-    localStorage.setItem('offlineMeasurements', JSON.stringify(offlineMeasurements));
-}
-
-// Modifizierte saveMeasurement Funktion
 async function saveMeasurement(duration, medium, result) {
     // Debug-Log
     console.log('Saving measurement:', { duration, medium, result });
@@ -316,7 +273,6 @@ async function saveMeasurement(duration, medium, result) {
         }
         
         const savedMeasurement = await response.json();
-        // Debug-Log
         console.log('Saved measurement:', savedMeasurement);
         
         measurements.push(savedMeasurement);
@@ -324,31 +280,21 @@ async function saveMeasurement(duration, medium, result) {
         
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
-        saveToLocalStorage(measurement);
-        measurements.push(measurement);
-        updateMeasurementsList();
+        alert('Fehler beim Speichern der Messung. Bitte überprüfen Sie Ihre Internetverbindung.');
     }
 }
 
-// Modifizierte loadMeasurements Funktion
 async function loadMeasurements() {
     try {
-        // Versuche offline Messungen zu synchronisieren
-        await syncOfflineMeasurements();
-        
         const response = await fetch('/api/measurements');
         if (!response.ok) throw new Error('Netzwerkfehler');
         
         measurements = await response.json();
         
-        // Füge nicht synchronisierte Messungen hinzu
-        const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
-        measurements = [...measurements, ...offlineMeasurements];
-        
     } catch (error) {
         console.error('Fehler beim Laden:', error);
-        const offlineMeasurements = JSON.parse(localStorage.getItem('offlineMeasurements') || '[]');
-        measurements = offlineMeasurements;
+        measurements = [];
+        alert('Fehler beim Laden der Messungen. Bitte überprüfen Sie Ihre Internetverbindung.');
     }
     
     updateMeasurementsList();
