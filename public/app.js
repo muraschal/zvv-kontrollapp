@@ -98,7 +98,7 @@ function downloadCSV() {
     // Excel-kompatibles Format mit BOM
     const BOM = "\uFEFF";
     const csvContent = "data:text/csv;charset=utf-8," + BOM
-        + "Zeitstempel,Kontrolldauer (Sekunden),Trägermedium,Standort\n"
+        + "Zeitstempel,Kontrolldauer (Sekunden),Trägermedium,Kontrollergebnis\n"
         + measurements.map(row => {
             const date = new Date(row.timestamp);
             const formattedDate = date.toLocaleString('de-CH', {
@@ -111,13 +111,13 @@ function downloadCSV() {
                 timeZone: 'Europe/Zurich'
             }).replace(/,/g, '');
             
-            return `"${formattedDate}",${row.duration},${row.medium},${row.location}`;
+            return `"${formattedDate}",${row.duration},${row.medium},${row.result}`;
         }).join("\n");
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "kontrollzeiten.csv");
+    link.setAttribute("download", `kontrollzeiten_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -172,7 +172,10 @@ function updateMeasurementsList() {
                     <div>Datum: ${formattedDate}</div>
                     <div>Dauer: ${formattedDuration}</div>
                     <div>Medium: ${m.medium}</div>
-                    <div>Ergebnis: ${m.result}</div>
+                    <div class="result ${m.result}">
+                        <i class="fas fa-${m.result === 'grün' ? 'check-circle' : 'exclamation-circle'}"></i>
+                        Ergebnis: ${m.result}
+                    </div>
                     <div class="measurement-arrow">›</div>
                 </div>
             `;
@@ -199,7 +202,8 @@ async function showMediaDialog(duration, result = null) {
                 if (medium !== 'Abgebrochen') {
                     // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
                     showMediaDialog(duration, medium);
-                } else {
+                }
+                if (medium === 'Abgebrochen') {
                     overlay.remove();
                     resetTimer();
                 }
@@ -215,12 +219,12 @@ async function showMediaDialog(duration, result = null) {
             button.onclick = async () => {
                 const kontrollergebnis = button.dataset.result;
                 resultDialog.classList.add('hidden');
+                overlay.remove();
                 
                 if (kontrollergebnis !== 'Abgebrochen') {
-                    await saveMeasurement(duration, medium, kontrollergebnis);
+                    await saveMeasurement(duration, result, kontrollergebnis);
                     updateMeasurementsList();
                 }
-                overlay.remove();
                 resetTimer();
             };
         });
