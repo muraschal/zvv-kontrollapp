@@ -312,15 +312,6 @@ button:active {
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
-    color: var(--text-black);
-}
-
-.version-badge {
-    color: var(--text-black);
-    background: none;
-    padding: 0.3rem 0.8rem;
-    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
-    font-size: 1.5rem;
 }
 
 .copyright {
@@ -344,8 +335,10 @@ button:active {
 }
 
 .changelog-entry h4 {
-    color: var(--text-gray);
+    color: var(--text-black);
     margin-bottom: 0.5rem;
+    font-family: "ZVV Brown Narrow S Web Regular", sans-serif;
+    font-size: 1.5rem;
 }
 
 .changelog-entry ul {
