@@ -399,18 +399,27 @@ function updateStatistics() {
         data: {
             labels: chartType === 'bar' 
                 ? chartData.map(d => d.medium)
-                : chartData.map(d => d.time),
-            datasets: [{
-                label: chartType === 'bar' 
-                    ? 'Durchschnittliche Kontrollzeit (Sekunden)'
-                    : 'Kontrolldauer im Zeitverlauf',
-                data: chartType === 'bar'
-                    ? chartData.map(d => d.avg.toFixed(2))
-                    : chartData.map(d => d.duration),
-                backgroundColor: chartType === 'bar' ? ['#0479cc', '#34c759', '#ff9500'] : '#0479cc',
-                borderColor: chartType === 'line' ? '#0479cc' : undefined,
-                tension: 0.3
-            }]
+                : chartData.data.map(d => d.time),
+            datasets: [
+                {
+                    label: chartType === 'bar' 
+                        ? 'Durchschnittliche Kontrollzeit'
+                        : 'Kontrolldauer',
+                    data: chartType === 'bar'
+                        ? chartData.map(d => d.avg.toFixed(2))
+                        : chartData.data.map(d => d.duration),
+                    backgroundColor: chartType === 'bar' ? ['#0479cc', '#34c759', '#ff9500'] : '#0479cc',
+                    borderColor: chartType === 'line' ? '#0479cc' : undefined,
+                    tension: 0.3
+                },
+                chartType === 'line' ? {
+                    label: 'Median',
+                    data: new Array(chartData.data.length).fill(chartData.median),
+                    borderColor: '#e5007d',
+                    borderDash: [5, 5],
+                    fill: false
+                } : null
+            ].filter(Boolean)
         },
         options: {
             responsive: true,
@@ -469,13 +478,20 @@ function calculateAveragesByMedium() {
 }
 
 function calculateTimelineData() {
-    return measurements
-        .slice(-20)  // Letzte 20 Messungen
-        .map(m => ({
-            time: new Date(m.timestamp).toLocaleTimeString('de-CH', {
-                hour: '2-digit',
-                minute: '2-digit'
-            }),
-            duration: m.duration
-        }));
+    const sortedDurations = [...measurements]
+        .sort((a, b) => a.duration - b.duration);
+    const median = sortedDurations[Math.floor(sortedDurations.length / 2)].duration;
+
+    return {
+        data: measurements
+            .slice(-20)
+            .map(m => ({
+                time: new Date(m.timestamp).toLocaleTimeString('de-CH', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+                duration: m.duration
+            })),
+        median: median
+    };
 } 

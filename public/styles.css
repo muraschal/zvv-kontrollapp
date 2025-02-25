@@ -555,3 +555,28 @@ button:active {
 .toggle-button i {
     margin-right: 0.5rem;
 }
+
+.stats-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.metric-value {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--zvv-blue);
+}
