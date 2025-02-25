@@ -19,6 +19,8 @@
     --zvv-light-blue: #0479cc;  /* ZVV Hellblau */
     --zvv-white: #ffffff;
     --zvv-gray: #f5f5f7;
+    --text-gray: #636363;
+    --text-black: #000000;
 }
 
 * {
@@ -162,6 +164,7 @@ button:active {
     cursor: pointer;
     position: relative;
     transition: background-color 0.2s;
+    color: var(--text-gray);
 }
 
 .measurement-item:hover {
@@ -170,6 +173,7 @@ button:active {
 
 .measurement-item div {
     margin: 0.2rem 0;
+    color: var(--text-gray);
 }
 
 .measurement-arrow {
@@ -402,6 +406,7 @@ button:active {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    color: inherit;
 }
 
 .result.grün {
@@ -552,7 +557,7 @@ button:active {
 .total-controls {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--zvv-blue);
+    color: var(--text-gray);
 }
 
 .toggle-button {
@@ -582,7 +587,7 @@ button:active {
 
 .metric-label {
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-gray);
     margin-bottom: 5px;
 }
 
@@ -601,4 +606,8 @@ button:active {
 .delete-button {
     background-color: var(--zvv-red);
     color: white;
+}
+
+.measurements-card h2 {
+    color: var(--text-black);
 }
