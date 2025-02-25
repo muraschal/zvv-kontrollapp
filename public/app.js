@@ -415,6 +415,15 @@ function updateStatistics() {
         document.getElementById('avgTime').textContent = '-';
         document.getElementById('minTime').textContent = '-';
         document.getElementById('maxTime').textContent = '-';
+        document.getElementById('medianTime').textContent = '-';
+        document.getElementById('greenCount').textContent = '-';
+        document.getElementById('orangeCount').textContent = '-';
+        
+        // Existierendes Chart zerstören falls vorhanden
+        if (window.myChart) {
+            window.myChart.destroy();
+            window.myChart = null;
+        }
         return;
     }
     
