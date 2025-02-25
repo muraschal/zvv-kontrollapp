@@ -106,10 +106,9 @@ function updateDisplay() {
     const elapsed = Date.now() - startTime;
     const ms = elapsed % 1000;
     const seconds = Math.floor(elapsed / 1000) % 60;
-    const minutes = Math.floor(elapsed / 60000) % 60;
-    const hours = Math.floor(elapsed / 3600000);
+    const minutes = Math.floor(elapsed / 60000);
     
-    timerDisplay.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad3(ms)}`;
+    timerDisplay.textContent = `${pad(minutes)}:${pad(seconds)}.${pad3(ms)}`;
 }
 
 function pad(number) {

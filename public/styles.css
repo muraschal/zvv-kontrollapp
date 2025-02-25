@@ -104,12 +104,20 @@ body::before {
     font-family: "ZVV Brown Narrow S Web Bold", sans-serif;
     text-align: center;
     font-variant-numeric: tabular-nums;
-    color: var(--zvv-blue);
+    color: var(--text-black);
     margin: 1rem 0;
 }
 
 .timer.running {
-    color: var(--zvv-green);
+    background: linear-gradient(
+        45deg,
+        var(--zvv-light-blue),
+        var(--zvv-green),
+        var(--zvv-pink)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .controls {
