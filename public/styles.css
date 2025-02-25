@@ -381,7 +381,7 @@ button:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--zvv-blue);
+    color: var(--text-black);
     opacity: 0.85;
     transition: opacity 0.3s;
     cursor: pointer;
@@ -389,6 +389,7 @@ button:active {
 
 .tab.active {
     opacity: 1;
+    color: var(--zvv-blue);
 }
 
 .tab i {
