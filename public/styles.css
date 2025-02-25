@@ -668,6 +668,6 @@ button:active {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.08;
+    opacity: 1; /* Volle Opacity für die Animation */
     pointer-events: none;
 }
