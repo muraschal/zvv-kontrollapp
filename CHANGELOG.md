@@ -4,6 +4,24 @@ Alle wichtigen Änderungen an diesem Projekt werden in dieser Datei dokumentiert
 
 ## [Unreleased]
 
+## [1.2.0] - 2024-02-15
+### Added
+- Tab-Navigation mit drei Bereichen (Zeit, Admin, ZVV)
+- Verbesserte UI-Struktur mit separaten Views
+- Font Awesome Icons für Navigation
+- Responsive Footer-Positionierung
+
+### Changed
+- Neu strukturierte Benutzeroberfläche
+- Admin-Funktionen in separatem Tab
+- Verbesserte mobile Ansicht
+- Optimierte Z-Index Hierarchie
+
+### Fixed
+- Überlappungsprobleme zwischen Footer und Navigation
+- View-Management verbessert
+- Konsistente Darstellung auf allen Geräten
+
 ## [1.1.0] - 2024-02-14
 ### Added
 - Vollständige Redis-Integration mit Upstash

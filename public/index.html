@@ -21,6 +21,7 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
@@ -29,23 +30,30 @@
     </div>
 
     <div class="container">
-        <div class="timer-card">
-            <div class="timer">00:00:00.000</div>
-            
-            <div class="controls">
-                <button id="startStop">Start</button>
-                <button id="reset">Abbrechen</button>
+        <div class="view timer-view active">
+            <div class="timer-card">
+                <div class="timer">00:00:00.000</div>
+                
+                <div class="controls">
+                    <button id="startStop">Start</button>
+                    <button id="reset">Abbrechen</button>
+                </div>
+            </div>
+
+            <div class="card measurements-card">
+                <h2>Letzte Kontrollen</h2>
+                <div id="measurementsList"></div>
             </div>
         </div>
 
-        <button id="downloadCSV">CSV herunterladen</button>
+        <div class="view admin-view">
+            <button id="downloadCSV">CSV herunterladen</button>
+            <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
+        </div>
 
-        <button id="deleteAll" class="delete-button">Alle Kontrollen löschen</button>
-
-        <!-- Neue Messungsübersicht -->
-        <div class="card measurements-card">
-            <h2>Letzte Kontrollen</h2>
-            <div id="measurementsList"></div>
+        <div class="view profile-view">
+            <h2>ZVV Profil</h2>
+            <p>Version 1.1.0</p>
         </div>
 
         <div id="mediaDialog" class="media-dialog hidden">
@@ -66,6 +74,22 @@
             </div>
         </footer>
     </div>
+
+    <!-- Neue Tab Navigation -->
+    <nav class="bottom-tabs">
+        <div class="tab active" data-view="timer">
+            <i class="fas fa-clock"></i>
+            <span>Zeit</span>
+        </div>
+        <div class="tab" data-view="admin">
+            <i class="fas fa-gear"></i>
+            <span>Admin</span>
+        </div>
+        <div class="tab" data-view="profile">
+            <i class="fas fa-user"></i>
+            <span>ZVV</span>
+        </div>
+    </nav>
 
     <script src="app.js"></script>
 </body>

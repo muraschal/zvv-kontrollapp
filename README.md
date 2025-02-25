@@ -9,6 +9,14 @@
 - **Hosting:** Vercel
 
 ## 2. App-Funktionalitäten
+### Navigation & Interface
+- 📱 Tab-basierte Navigation
+  - Zeitmessung
+  - Admin-Bereich
+  - ZVV-Profil
+- 🎨 Responsive Design mit Footer
+- 💫 Animierte Übergänge
+
 ### Zeitmessung & Erfassung
 - ⏱️ Start/Stop-Button für Zeitmessung
 - 🔄 Abbruch-Button für Reset
@@ -75,6 +83,8 @@ Die App ist automatisch mit Vercel verbunden und deployed bei jedem Push auf den
 - **Auto-Sync**: Synchronisiert Offline-Daten automatisch
 - **PWA-Support**: Installierbar als Progressive Web App
 - **Responsive Design**: Optimiert für mobile Nutzung
+- **Tab Navigation**: Intuitive Bereichsaufteilung
+- **Verbesserte UI**: Klare visuelle Hierarchie
 
 ## 6. Updates & Changelog
 Siehe [CHANGELOG.md](CHANGELOG.md) für eine detaillierte Liste aller Änderungen.

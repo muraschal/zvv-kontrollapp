@@ -25,6 +25,32 @@ resetBtn.addEventListener('click', resetTimer);
 downloadBtn.addEventListener('click', downloadCSV);
 document.getElementById('deleteAll').addEventListener('click', deleteAllMeasurements);
 
+// Tab Navigation Logic
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Show corresponding view
+        const view = tab.dataset.view;
+        showView(view);
+    });
+});
+
+function showView(view) {
+    // Hide all views
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    
+    // Show selected view
+    const selectedView = document.querySelector(`.${view}-view`);
+    if (selectedView) {
+        selectedView.classList.add('active');
+    }
+}
+
 function toggleTimer() {
     if (!isRunning) {
         if (timer) clearInterval(timer);
