@@ -167,14 +167,21 @@ function updateMeasurementsList() {
             const milliseconds = Math.floor((m.duration % 1) * 1000);
             const formattedDuration = `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`;
             
+            // Fallback für fehlende Ergebnisse
+            const result = m.result || 'Abgebrochen';
+            const resultIcon = result === 'grün' ? 'check-circle' : 
+                             result === 'orange' ? 'exclamation-circle' : 
+                             'times-circle';
+            const resultClass = result === 'Abgebrochen' ? 'cancelled' : result;
+            
             return `
                 <div class="measurement-item" onclick="showMeasurementDetails('${m.timestamp}')">
                     <div>Datum: ${formattedDate}</div>
                     <div>Dauer: ${formattedDuration}</div>
                     <div>Medium: ${m.medium}</div>
-                    <div class="result ${m.result}">
-                        <i class="fas fa-${m.result === 'grün' ? 'check-circle' : 'exclamation-circle'}"></i>
-                        Ergebnis: ${m.result}
+                    <div class="result ${resultClass}">
+                        <i class="fas fa-${resultIcon}"></i>
+                        Ergebnis: ${result}
                     </div>
                     <div class="measurement-arrow">›</div>
                 </div>
