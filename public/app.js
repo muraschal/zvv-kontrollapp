@@ -426,6 +426,14 @@ function updateStatistics() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 30,
+                    top: 20,
+                    bottom: 10
+                }
+            },
             plugins: {
                 legend: {
                     display: false
@@ -434,13 +442,19 @@ function updateStatistics() {
             scales: {
                 x: {
                     display: true,
+                    grid: {
+                        display: true,
+                        drawBorder: true,
+                        drawOnChartArea: true,
+                        drawTicks: true
+                    },
                     ticks: {
                         maxRotation: 0,
                         minRotation: 0,
                         autoSkip: false,
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
-                            size: 12
+                            size: 14
                         }
                     },
                     title: {
@@ -454,10 +468,18 @@ function updateStatistics() {
                 },
                 y: {
                     display: true,
+                    beginAtZero: true,
+                    grid: {
+                        display: true,
+                        drawBorder: true,
+                        drawOnChartArea: true,
+                        drawTicks: true
+                    },
                     ticks: {
+                        stepSize: 2,
                         font: {
                             family: '"ZVV Brown Narrow S Web Regular", sans-serif',
-                            size: 12
+                            size: 14
                         }
                     },
                     title: {
@@ -527,4 +549,19 @@ function calculateTimelineData() {
             })),
         median: median
     };
-} 
+}
+
+// Initialize background animation
+window.addEventListener('DOMContentLoaded', () => {
+    lottie.loadAnimation({
+        container: document.body,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/gfx/zvv_animation-01.json',
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice',
+            className: 'background-animation'
+        }
+    });
+}); 
