@@ -80,7 +80,7 @@ npm start
 
 ## Die Geschichte
 
-### �� Ursprung & Vision
+### 🛠 Ursprung & Vision
 Die ZVV Kontrollapp entstand aus einem praktischen Bedürfnis: Die präzise Erfassung von Kontrollzeiten im öffentlichen Verkehr. Was als einfacher Timer begann, entwickelte sich zu einer vollwertigen Progressive Web App.
 
 ### 🛠 Technische Evolution
@@ -121,4 +121,10 @@ Die App wird kontinuierlich verbessert, basierend auf:
 - Betrieblichen Anforderungen
 
 ## Version
-Aktuelle Version: 1.3.3
+Aktuelle Version: 1.3.4
+
+## Letzte Änderungen (v1.3.4)
+- Optimierter Header mit ZVV-Logo links und Versionsinformation rechts
+- Achsenbeschriftungen im Diagramm immer in Schwarz für bessere Lesbarkeit
+- Verbesserte Dialog-Navigation mit X-Button statt Abbrechen-Button
+- Optimierte Darstellung der Kontrolldauer im Liniendiagramm
