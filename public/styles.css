@@ -51,7 +51,7 @@ body::before {
     background-image: url('gfx/zvv-bg.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.15;
+    opacity: 0.20;
     z-index: -2;
     pointer-events: none;
     mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
@@ -169,14 +169,19 @@ button:active {
     padding: 1rem;
     margin-bottom: 0.5rem;
     border-left: 4px solid var(--zvv-blue);
-    cursor: pointer;
     position: relative;
     transition: background-color 0.2s;
     color: var(--text-gray);
 }
 
-.measurement-item:hover {
-    background: #e5e5e5;
+.measurement-item.grün {
+    background: rgba(35, 156, 54, 0.03); /* Sehr subtiles Grün */
+    border-left-color: var(--zvv-green);
+}
+
+.measurement-item.orange {
+    background: rgba(255, 152, 0, 0.03); /* Sehr subtiles Orange */
+    border-left-color: #ff9800;
 }
 
 .measurement-item div {
@@ -185,12 +190,7 @@ button:active {
 }
 
 .measurement-arrow {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: var(--zvv-blue);
+    display: none;
 }
 
 .no-measurements {

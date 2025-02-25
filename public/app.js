@@ -89,7 +89,8 @@ function toggleTimer() {
         timerDisplay.classList.add('running');
         startStopBtn.classList.add('running');
         document.querySelector('.timer-card').classList.add('active-control');
-        document.querySelector('.background-animation').classList.add('active');
+        const animation = document.querySelector('.background-animation');
+        if (animation) animation.classList.add('active');
     } else {
         clearInterval(timer);
         const elapsed = Date.now() - startTime;
@@ -97,7 +98,8 @@ function toggleTimer() {
         timerDisplay.classList.remove('running');
         startStopBtn.classList.remove('running');
         document.querySelector('.timer-card').classList.remove('active-control');
-        document.querySelector('.background-animation').classList.remove('active');
+        const animation = document.querySelector('.background-animation');
+        if (animation) animation.classList.remove('active');
         startStopBtn.textContent = 'Start';
         showMediaDialog(duration);
     }
@@ -191,7 +193,7 @@ function updateMeasurementsList() {
             const resultClass = result === 'Abgebrochen' ? 'cancelled' : result;
             
             return `
-                <div class="measurement-item" onclick="showMeasurementDetails('${m.timestamp}')">
+                <div class="measurement-item ${resultClass}">
                     <div>Datum: ${formattedDate}</div>
                     <div>Dauer: ${formattedDuration}</div>
                     <div>Medium: ${m.medium}</div>
@@ -199,7 +201,6 @@ function updateMeasurementsList() {
                         <i class="fas fa-${resultIcon}"></i>
                         Ergebnis: ${result}
                     </div>
-                    <div class="measurement-arrow">›</div>
                 </div>
             `;
         })
@@ -215,7 +216,8 @@ function resetTimer() {
     timerDisplay.classList.remove('running');
     startStopBtn.classList.remove('running');
     document.querySelector('.timer-card').classList.remove('active-control');
-    document.querySelector('.background-animation').classList.remove('active');
+    const animation = document.querySelector('.background-animation');
+    if (animation) animation.classList.remove('active');
     isRunning = false;
 }
 
