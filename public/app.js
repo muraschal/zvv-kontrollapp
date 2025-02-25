@@ -5,17 +5,13 @@ let measurements = [];
 
 const timerDisplay = document.querySelector('.timer');
 const startStopBtn = document.getElementById('startStop');
-const resetBtn = document.getElementById('reset');
 const downloadBtn = document.getElementById('downloadCSV');
 
 console.log('Timer Display:', timerDisplay);
 console.log('Start/Stop Button:', startStopBtn);
-console.log('Reset Button:', resetBtn);
 console.log('Download Button:', downloadBtn);
 
 startStopBtn.addEventListener('click', toggleTimer);
-resetBtn.addEventListener('click', resetTimer);
-downloadBtn.addEventListener('click', downloadCSV);
 document.getElementById('deleteAll').addEventListener('click', deleteAllMeasurements);
 
 // Tab Navigation Logic
@@ -101,13 +97,6 @@ function pad3(number) {
     return number.toString().padStart(3, '0');
 }
 
-function resetTimer() {
-    clearInterval(timer);
-    timerDisplay.textContent = '00:00:00.000';
-    startStopBtn.textContent = 'Start';
-    isRunning = false;
-}
-
 function downloadCSV() {
     // Excel-kompatibles Format mit BOM
     const BOM = "\uFEFF";
@@ -144,14 +133,27 @@ function downloadCSV() {
 
 // Service Worker registrieren
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
+  window.addEventListener('load', async () => {
+    // Zuerst alle Service Worker registrierungen finden und updaten
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    for (const registration of registrations) {
+        await registration.unregister();
+    }
+    
+    // Cache leeren
+    const cacheNames = await caches.keys();
+    await Promise.all(
+        cacheNames.map(cacheName => caches.delete(cacheName))
+    );
+
+    // Service Worker neu registrieren
     navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful');
-      })
-      .catch(err => {
-        console.log('ServiceWorker registration failed: ', err);
-      });
+        .then(registration => {
+            console.log('ServiceWorker registration successful');
+        })
+        .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+        });
   });
 } 
 
