@@ -282,10 +282,16 @@ button:active {
 }
 
 .version-info {
-    text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #eee;
+}
+
+.version-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .version-badge {
@@ -294,7 +300,11 @@ button:active {
     color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
-    margin-bottom: 0.5rem;
+}
+
+.copyright {
+    color: var(--zvv-blue);
+    opacity: 0.8;
 }
 
 .changelog-section {
@@ -326,6 +336,13 @@ button:active {
     position: absolute;
     left: 0;
     color: var(--zvv-light-blue);
+}
+
+.changelog-entry.current {
+    background: rgba(35, 156, 54, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--zvv-green);
 }
 
 .bottom-tabs {
@@ -370,4 +387,22 @@ button:active {
 
 .view.active {
     display: block;
+}
+
+.result {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.result.grün {
+    color: var(--zvv-green);
+}
+
+.result.orange {
+    color: #ff9800;
+}
+
+.result i {
+    font-size: 1.1em;
 }

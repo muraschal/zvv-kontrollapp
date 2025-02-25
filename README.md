@@ -22,15 +22,17 @@
 - 🔄 Abbruch-Button für Reset
 - 📝 Trägermedien-Auswahl:
   - SwissPass
-  - Sicherheitspapier
   - E-Ticket
   - E-Ticket mit Ausweisprüfung
+- 🚦 Kontrollergebnis:
+  - Grün (Gültig)
+  - Orange (Ungültig)
 
 ### Datenmanagement
 - 📊 Automatische Speicherung in Redis
 - 💾 Offline-Fähigkeit mit LocalStorage
 - 🔄 Automatische Synchronisation
-- 📥 Excel-kompatible CSV-Exports
+- 📥 Excel-kompatible CSV-Exports mit Kontrollergebnis
 - 🗑️ Löschen aller gespeicherten Kontrollen
 
 ## 3. Datenstruktur
@@ -40,6 +42,7 @@ Die Messungen werden in Redis als JSON-Objekte gespeichert:
   "timestamp": "2024-02-14T15:30:00.000Z",
   "duration": 12.345,
   "medium": "SwissPass",
+  "result": "grün",
   "synced": true
 }
 ```
