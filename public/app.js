@@ -417,15 +417,8 @@ function updateStatistics() {
                     backgroundColor: chartType === 'bar' ? ['#0479cc', '#34c759', '#ff9500'] : '#0479cc',
                     borderColor: chartType === 'line' ? '#0479cc' : undefined,
                     tension: 0.3
-                },
-                chartType === 'line' ? {
-                    label: 'Median',
-                    data: new Array(chartData.data.length).fill(chartData.median),
-                    borderColor: '#e5007d',
-                    borderDash: [5, 5],
-                    fill: false
-                } : null
-            ].filter(Boolean)
+                }
+            ],
         },
         options: {
             responsive: true,
@@ -433,22 +426,40 @@ function updateStatistics() {
             scales: {
                 x: {
                     display: true,
+                    ticks: {
+                        maxRotation: 0,
+                        minRotation: 0,
+                        autoSkip: false,
+                        font: {
+                            family: '"ZVV Brown Narrow S Web Regular", sans-serif',
+                            size: 12
+                        }
+                    },
                     title: {
                         display: true,
-                        text: chartType === 'bar' ? 'Trägermedium' : 'Zeit'
+                        text: chartType === 'bar' ? 'Trägermedium' : 'Zeit',
+                        font: {
+                            family: '"ZVV Brown Narrow S Web Regular", sans-serif',
+                            size: 14
+                        }
                     }
                 },
                 y: {
                     display: true,
+                    ticks: {
+                        font: {
+                            family: '"ZVV Brown Narrow S Web Regular", sans-serif',
+                            size: 12
+                        }
+                    },
                     title: {
                         display: true,
-                        text: 'Sekunden'
+                        text: 'Sekunden',
+                        font: {
+                            family: '"ZVV Brown Narrow S Web Regular", sans-serif',
+                            size: 14
+                        }
                     }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
                 }
             }
         }
