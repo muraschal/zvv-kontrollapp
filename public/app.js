@@ -376,6 +376,20 @@ function updateStatistics() {
     const ctx = document.getElementById('statsChart');
     document.getElementById('totalControls').textContent = measurements.length;
     
+    // Sicherstellen dass Messungen vorhanden sind
+    if (!measurements || measurements.length === 0) {
+        document.getElementById('avgTime').textContent = '-';
+        document.getElementById('minTime').textContent = '-';
+        document.getElementById('maxTime').textContent = '-';
+        return;
+    }
+    
+    // Existierendes Chart zerstören falls vorhanden
+    if (window.myChart) {
+        window.myChart.destroy();
+        window.myChart = null;
+    }
+    
     const chartData = chartType === 'bar' 
         ? calculateAveragesByMedium()
         : calculateTimelineData();
@@ -400,6 +414,7 @@ function updateStatistics() {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 x: {
                     display: true,
