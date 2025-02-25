@@ -30,7 +30,28 @@ document.querySelectorAll('.tab').forEach(tab => {
         // Show corresponding view
         const view = tab.dataset.view;
         showView(view);
+        
+        // Aktualisiere die Liste beim Wechsel zum Timer-Tab
+        if (view === 'timer') {
+            loadMeasurements();
+        }
     });
+});
+
+// Regelmäßige Aktualisierung der Liste (alle 30 Sekunden)
+setInterval(() => {
+    // Nur aktualisieren wenn Timer-Tab aktiv ist
+    if (document.querySelector('.timer-view').classList.contains('active')) {
+        loadMeasurements();
+    }
+}, 30000);
+
+// Aktualisiere auch beim Fokus-Wechsel (Tab/Fenster Aktivierung)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && 
+        document.querySelector('.timer-view').classList.contains('active')) {
+        loadMeasurements();
+    }
 });
 
 function showView(view) {
@@ -290,6 +311,7 @@ async function loadMeasurements() {
         if (!response.ok) throw new Error('Netzwerkfehler');
         
         measurements = await response.json();
+        console.log('Loaded measurements from Redis:', measurements);
         
     } catch (error) {
         console.error('Fehler beim Laden:', error);
@@ -307,7 +329,7 @@ async function deleteAllMeasurements() {
     const password = prompt('Bitte geben Sie das Passwort ein:');
     
     if (!password) {
-        return; // Wenn Cancel geklickt wurde
+        return;
     }
     
     if (password !== 'satoshi') {
@@ -324,6 +346,8 @@ async function deleteAllMeasurements() {
                 }
             });
             
+            console.log('Delete response:', response.status, await response.text());
+            
             if (response.status === 401) {
                 alert('Nicht autorisiert');
                 return;
@@ -335,6 +359,7 @@ async function deleteAllMeasurements() {
             
             measurements = [];
             updateMeasurementsList();
+            alert('Alle Messungen wurden erfolgreich gelöscht');
             
         } catch (error) {
             console.error('Fehler beim Löschen:', error);
