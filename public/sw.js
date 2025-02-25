@@ -29,7 +29,11 @@ self.addEventListener('fetch', event => {
           if (!response || response.status !== 200) return response;
           const responseToCache = response.clone();
           caches.open(CACHE_NAME)
-            .then(cache => cache.put(event.request, responseToCache));
+            .then(cache => {
+              if (event.request.method === 'GET') {
+                cache.put(event.request, responseToCache);
+              }
+            });
           return response;
         });
       })
