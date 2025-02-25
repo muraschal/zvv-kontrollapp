@@ -528,13 +528,34 @@ function updateStatistics() {
                         : chartData.data.map(d => d.duration),
                     backgroundColor: chartType === 'bar' 
                         ? chartData.map(d => {
-                            if (d.medium === 'SwissPass') return 'var(--swisspass-color)';
-                            if (d.medium === 'E-Ticket') return 'var(--eticket-color)';
-                            if (d.medium === 'E-Ticket mit Ausweisprüfung') return 'var(--eticket-id-color)';
+                            if (d.medium === 'SwissPass') return '#c51416'; // SwissPass Rot
+                            if (d.medium === 'E-Ticket') return '#8a2be2'; // E-Ticket Violett
+                            if (d.medium === 'E-Ticket mit Ausweisprüfung') return '#ff69b4'; // E-Ticket mit Ausweis Pink
                             return '#0479cc'; // Fallback
                         })
-                        : '#0479cc',
-                    borderColor: chartType === 'line' ? '#0479cc' : undefined,
+                        : chartType === 'line' 
+                            ? 'rgba(4, 121, 204, 0.2)' // Transparentes Blau für den Hintergrund
+                            : '#0479cc',
+                    borderColor: chartType === 'line' 
+                        ? '#0479cc' 
+                        : undefined,
+                    pointBackgroundColor: chartType === 'line'
+                        ? chartData.data.map(d => {
+                            if (d.medium === 'SwissPass') return '#c51416'; // SwissPass Rot
+                            if (d.medium === 'E-Ticket') return '#8a2be2'; // E-Ticket Violett
+                            if (d.medium === 'E-Ticket mit Ausweisprüfung') return '#ff69b4'; // E-Ticket mit Ausweis Pink
+                            return '#0479cc'; // Fallback
+                        })
+                        : undefined,
+                    pointBorderColor: chartType === 'line'
+                        ? chartData.data.map(d => {
+                            if (d.medium === 'SwissPass') return '#c51416'; // SwissPass Rot
+                            if (d.medium === 'E-Ticket') return '#8a2be2'; // E-Ticket Violett
+                            if (d.medium === 'E-Ticket mit Ausweisprüfung') return '#ff69b4'; // E-Ticket mit Ausweis Pink
+                            return '#0479cc'; // Fallback
+                        })
+                        : undefined,
+                    pointRadius: chartType === 'line' ? 5 : 0,
                     tension: 0.3
                 }
             ],
@@ -675,7 +696,8 @@ function calculateTimelineData() {
     return {
         data: recentMeasurements.map((m, index) => ({
             time: `#${index + 1}`,
-            duration: m.duration
+            duration: m.duration,
+            medium: m.medium // Speichere das Medium für die Farbzuweisung
         })),
         median: median
     };
