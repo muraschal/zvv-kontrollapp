@@ -52,8 +52,33 @@
         </div>
 
         <div class="view profile-view">
-            <h2>ZVV Profil</h2>
-            <p>Version 1.1.0</p>
+            <div class="info-card">
+                <h2>App Information</h2>
+                <div class="version-info">
+                    <p class="version-badge">Version 1.2.0</p>
+                    <p>© Zürcher Verkehrsverbund - Kontrollzeit App</p>
+                </div>
+                
+                <div class="changelog-section">
+                    <h3>Letzte Änderungen</h3>
+                    <div class="changelog-entry">
+                        <h4>Version 1.2.0 (15.02.2024)</h4>
+                        <ul>
+                            <li>Neue Tab-Navigation</li>
+                            <li>Verbesserte Benutzeroberfläche</li>
+                            <li>Optimierte mobile Ansicht</li>
+                        </ul>
+                    </div>
+                    <div class="changelog-entry">
+                        <h4>Version 1.1.0 (14.02.2024)</h4>
+                        <ul>
+                            <li>Redis-Integration</li>
+                            <li>Offline-Funktionalität</li>
+                            <li>Verbesserte Fehlerbehandlung</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="mediaDialog" class="media-dialog hidden">
@@ -66,13 +91,6 @@
                 <button class="media-button cancel" data-medium="Abgebrochen">Abbrechen</button>
             </div>
         </div>
-
-        <footer class="footer">
-            <div class="footer-content">
-                <span class="copyright">© Zürcher Verkehrsverbund - Kontrollzeit App</span>
-                <span class="version">Version 1.1.0</span>
-            </div>
-        </footer>
     </div>
 
     <!-- Neue Tab Navigation -->
@@ -86,8 +104,8 @@
             <span>Admin</span>
         </div>
         <div class="tab" data-view="profile">
-            <i class="fas fa-user"></i>
-            <span>ZVV</span>
+            <i class="fas fa-info-circle"></i>
+            <span>Info</span>
         </div>
     </nav>
 
