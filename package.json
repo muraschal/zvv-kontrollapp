@@ -6,7 +6,7 @@
     "express": "^4.21.2"
   },
   "name": "zvv-kontrollapp",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Progressive Web App (PWA) zur Erfassung von Kontrollzeiten für den ZVV",
   "main": "server.js",
   "scripts": {
