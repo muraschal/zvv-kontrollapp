@@ -4,6 +4,17 @@ Alle wichtigen Änderungen an diesem Projekt werden in dieser Datei dokumentiert
 
 ## [Unreleased]
 
+## [1.3.0] - 2024-02-15
+### Added
+- Kontrollergebnis-Erfassung (Grün/Orange)
+- Zweistufiger Dialog-Prozess für Erfassung
+- Farbkodierte Ergebnis-Buttons mit Icons
+
+### Changed
+- Entfernung der Option "Sicherheitspapier"
+- Erweiterte Datenstruktur um Kontrollergebnis
+- Verbesserte Dialog-Navigation
+
 ## [1.2.0] - 2024-02-15
 ### Added
 - Tab-Navigation mit drei Bereichen (Zeit, Admin, ZVV)

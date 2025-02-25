@@ -55,7 +55,7 @@
             <div class="info-card">
                 <h2>App Information</h2>
                 <div class="version-info">
-                    <p class="version-badge">Version 1.2.0</p>
+                    <p class="version-badge">Version 1.3.0</p>
                     <p>© Zürcher Verkehrsverbund - Kontrollzeit App</p>
                 </div>
                 
@@ -85,10 +85,22 @@
             <h3>Trägermedium wählen</h3>
             <div class="media-buttons">
                 <button class="media-button" data-medium="SwissPass">SwissPass</button>
-                <button class="media-button" data-medium="Sicherheitspapier">Sicherheitspapier</button>
                 <button class="media-button" data-medium="E-Ticket">E-Ticket</button>
                 <button class="media-button" data-medium="E-Ticket mit Ausweisprüfung">E-Ticket mit Ausweisprüfung</button>
                 <button class="media-button cancel" data-medium="Abgebrochen">Abbrechen</button>
+            </div>
+        </div>
+
+        <div id="resultDialog" class="media-dialog hidden">
+            <h3>Kontrollergebnis</h3>
+            <div class="media-buttons">
+                <button class="media-button result-green" data-result="grün">
+                    <i class="fas fa-check-circle"></i> Grün
+                </button>
+                <button class="media-button result-orange" data-result="orange">
+                    <i class="fas fa-exclamation-circle"></i> Orange
+                </button>
+                <button class="media-button cancel" data-result="Abgebrochen">Abbrechen</button>
             </div>
         </div>
     </div>

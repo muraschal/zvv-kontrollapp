@@ -233,6 +233,18 @@ button:active {
     background: var(--zvv-pink);
 }
 
+.media-button.result-green {
+    background-color: var(--zvv-green);
+}
+
+.media-button.result-orange {
+    background-color: #ff9800;
+}
+
+.media-button i {
+    margin-right: 8px;
+}
+
 .overlay {
     position: fixed;
     top: 0;

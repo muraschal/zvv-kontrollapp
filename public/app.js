@@ -172,6 +172,7 @@ function updateMeasurementsList() {
                     <div>Datum: ${formattedDate}</div>
                     <div>Dauer: ${formattedDuration}</div>
                     <div>Medium: ${m.medium}</div>
+                    <div>Ergebnis: ${m.result}</div>
                     <div class="measurement-arrow">›</div>
                 </div>
             `;
@@ -179,27 +180,51 @@ function updateMeasurementsList() {
         .join('');
 } 
 
-async function showMediaDialog(duration) {
+async function showMediaDialog(duration, result = null) {
     const overlay = document.createElement('div');
     overlay.className = 'overlay';
     document.body.appendChild(overlay);
     
-    const mediaDialog = document.getElementById('mediaDialog');
-    mediaDialog.classList.remove('hidden');
-    
-    const mediaButtons = mediaDialog.querySelectorAll('.media-button');
-    mediaButtons.forEach(button => {
-        button.onclick = async () => {
-            const medium = button.dataset.medium;
-            if (medium !== 'Abgebrochen') {
-                await saveMeasurement(duration, medium);
-                updateMeasurementsList();
-            }
-            mediaDialog.classList.add('hidden');
-            overlay.remove();
-            resetTimer();
-        };
-    });
+    // Wenn noch kein Ergebnis gewählt wurde, zeige Trägermedium-Dialog
+    if (!result) {
+        const mediaDialog = document.getElementById('mediaDialog');
+        mediaDialog.classList.remove('hidden');
+        
+        const mediaButtons = mediaDialog.querySelectorAll('.media-button');
+        mediaButtons.forEach(button => {
+            button.onclick = async () => {
+                const medium = button.dataset.medium;
+                mediaDialog.classList.add('hidden');
+                
+                if (medium !== 'Abgebrochen') {
+                    // Nach Trägermedium-Wahl zeige Ergebnis-Dialog
+                    showMediaDialog(duration, medium);
+                } else {
+                    overlay.remove();
+                    resetTimer();
+                }
+            };
+        });
+    } else {
+        // Zeige Ergebnis-Dialog
+        const resultDialog = document.getElementById('resultDialog');
+        resultDialog.classList.remove('hidden');
+        
+        const resultButtons = resultDialog.querySelectorAll('.media-button');
+        resultButtons.forEach(button => {
+            button.onclick = async () => {
+                const kontrollergebnis = button.dataset.result;
+                resultDialog.classList.add('hidden');
+                
+                if (kontrollergebnis !== 'Abgebrochen') {
+                    await saveMeasurement(duration, medium, kontrollergebnis);
+                    updateMeasurementsList();
+                }
+                overlay.remove();
+                resetTimer();
+            };
+        });
+    }
 } 
 
 // Neue Funktion für Offline-Speicherung
@@ -238,11 +263,12 @@ async function syncOfflineMeasurements() {
 }
 
 // Modifizierte saveMeasurement Funktion
-async function saveMeasurement(duration, medium) {
+async function saveMeasurement(duration, medium, result) {
     const measurement = {
         timestamp: new Date().toISOString(),
         duration: parseFloat(duration.toFixed(3)),
-        medium: medium
+        medium: medium,
+        result: result
     };
     
     try {
