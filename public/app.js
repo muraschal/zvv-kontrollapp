@@ -264,13 +264,16 @@ async function showMediaDialog(duration, result = null) {
                     return;
                 }
                 
-                // Debug-Log
-                console.log('Selected result:', kontrollergebnis);
-                console.log('Medium:', result);
-                
                 await saveMeasurement(duration, result, kontrollergebnis);
                 updateMeasurementsList();
-                resetTimer();
+                
+                // Timer zurücksetzen
+                clearInterval(timer);
+                timerDisplay.textContent = '00:00:00.000';
+                startStopBtn.textContent = 'Start';
+                startStopBtn.classList.remove('running');
+                isRunning = false;
+                timerDisplay.classList.remove('running');
             };
         });
     }
