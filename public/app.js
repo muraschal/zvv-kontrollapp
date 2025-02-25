@@ -457,10 +457,19 @@ function updateSummaryStats() {
     const avg = allDurations.reduce((a,b) => a + b, 0) / allDurations.length;
     const min = Math.min(...allDurations);
     const max = Math.max(...allDurations);
+    const sortedDurations = [...allDurations].sort((a, b) => a - b);
+    const median = sortedDurations[Math.floor(sortedDurations.length / 2)];
+    
+    // Zähle Grün/Orange
+    const greenCount = measurements.filter(m => m.result === 'grün').length;
+    const orangeCount = measurements.filter(m => m.result === 'orange').length;
 
     document.getElementById('avgTime').textContent = avg.toFixed(2) + 's';
     document.getElementById('minTime').textContent = min.toFixed(2) + 's';
     document.getElementById('maxTime').textContent = max.toFixed(2) + 's';
+    document.getElementById('medianTime').textContent = median.toFixed(2) + 's';
+    document.getElementById('greenCount').textContent = greenCount;
+    document.getElementById('orangeCount').textContent = orangeCount;
 }
 
 // Durchschnittszeiten berechnen
