@@ -69,7 +69,7 @@ body::before {
 }
 
 .header {
-    background-color: var(--zvv-red);
+    background-color: var(--zvv-blue);
     color: var(--zvv-white);
     padding: 0.875rem 1.25rem;
     position: sticky;
